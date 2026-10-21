@@ -1,30 +1,50 @@
 # Anthill Game Studios
 
-A cinematic, communication-led concept website built with React, Vite, GSAP and Lenis.
+A presentation-ready studio introduction built with React, Vite, GSAP and Lenis.
 
-## Run locally
+## Local development
 
 ```sh
 npm install
 npm run dev -- --port 5174
 ```
 
-Production build: `npm run build`. Preview the build: `npm run preview`.
+## Present the production build
 
-## Experience
+```sh
+npm run build
+npm run present
+```
 
-- Official supplied Anthill Ventures logo and artwork extracted from the Anthill Game Studios identity.
-- Creative vision, proposal-sourced opportunity figures, Indian–Nordic collaboration, project structure, revenue model, team and contact links.
-- GSAP typography sequences, scroll-linked illustrations, animated connection diagram, ambient pixels, counters, magnetic links and reactive art cards.
-- Mobile navigation, creative-direction dialogs and FAQ accordions. There are no playable games or game controls.
-- Self-hosted fonts and images, keyboard support and reduced-motion styling.
+Open http://localhost:4174/ and use normal browser zoom. All artwork and fonts are self-hosted, so the built website has no external asset or API dependency. Keep this terminal running during the presentation. Stop with Ctrl+C.
+
+## The experience
+
+1. A clear cinematic opening with original Indian-world artwork, the official logo and a direct studio proposition.
+2. A studio manifesto rooted in Indian cinema, culture and mythology.
+3. Three animated world explorations, clearly identified as concept art.
+4. A creative workbench exploring story, world and play, followed by the studio's creative principles.
+5. Formal portraits of Rana Daggubati and Prasad Vanga from their official Anthill Ventures profiles.
+6. Invitations for storytellers, creators and industry collaborators, with working email links.
+
+The website contains no playable games, artificial loading sequence, popup gallery or FAQ accordion. Motion respects the reduced-motion preference. Mobile navigation and invitation choices support keyboard access.
 
 ## Source material
 
-The supplied `Anthill-Game-Studios-Identity.pdf` provides the visual language and illustrative worlds. `Infuse_Deck_Proposal_draft (1).pdf` provides the proposed collaboration and commercial model, contacts and cited opportunity figures. Figures are attributed to that draft and are not presented as a live market-data feed. The documents do not establish a formal corporate relationship between the two brands.
+The supplied Anthill Game Studios identity provides the illustrative worlds. The user-provided Anthill Ventures logo appears in the header and footer. The public-facing content presents a game studio, with no proposal, financing or investment narrative. Self-hosted Oxanium and Space Grotesk fonts create the digital visual direction.
 
-Asset provenance and font licenses are in `public/assets/SOURCES.md`.
+Portraits and supported biographies come from Anthill Ventures' official profiles. Prasad's title is explicitly Founder & CEO of Anthill Ventures. Contact options use the organization's published email address. Profile and asset provenance are recorded in public/assets/people-sources.md.
 
-## Browser verification
+Asset provenance and font licenses are in public/assets/SOURCES.md.
 
-The scripts in `scripts/` run through `@playwright/cli run-code --filename <script>`. They inspect responsive text, document overflow, image loading, navigation, creative-direction dialogs, FAQ behavior and motion. Screenshots are written to the ignored `output/playwright/` directory.
+## Verification
+
+Run browser checks through the Playwright CLI:
+
+```sh
+npx @playwright/cli -s=anthill open http://localhost:4174/
+npx @playwright/cli -s=anthill run-code --filename scripts/presentation-check.cjs
+npx @playwright/cli -s=anthill run-code --filename scripts/presentation-interactions.cjs
+```
+
+The checks cover responsive text and overflow, images, fonts, reduced motion, navigation, creative process states and contact choices. Screenshots are written under output/playwright/.

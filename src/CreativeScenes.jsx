@@ -1,0 +1,126 @@
+import { useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowDownRight } from 'lucide-react';
+import './creative-scenes.css';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const directions = [
+  {
+    number: '01',
+    name: 'Larger than life',
+    title: <>Mass heroes.<br /><em data-text="Pixel legends.">Pixel legends.</em></>,
+    description: 'The swagger of Indian cinema, reimagined as a bold new world. Big personalities, unmistakable attitude and a visual language that crosses borders.',
+    notes: ['Cinema & character', 'Bollywood-inspired'],
+    image: 'mass-heroes.webp',
+    alt: 'A larger-than-life Indian action hero in a red jacket and gold sunglasses, rendered in sculptural pixels.',
+    className: 'cv-mass',
+  },
+  {
+    number: '02',
+    name: 'A city with a pulse',
+    title: <>Our streets.<br /><em data-text="New rules.">New rules.</em></>,
+    description: 'Mumbai becomes a living comic. The colour, friction and everyday ambition of the city open up an original perspective on a world in motion.',
+    notes: ['Place & perspective', 'Mumbai-inspired'],
+    image: 'mumbai.webp',
+    alt: 'A vibrant comic-book vision of Mumbai, with a motorcycle rider against a dense, colourful city.',
+    className: 'cv-mumbai',
+  },
+  {
+    number: '03',
+    name: 'Ancient meets possible',
+    title: <>Ancient stories.<br /><em data-text="New futures.">New futures.</em></>,
+    description: 'A post-collapse world shaped by Hindu mythology. Ancient imagination meets speculative futures, creating a canvas for stories that feel both familiar and entirely new.',
+    notes: ['Myth & imagination', 'Future-facing worlds'],
+    image: 'myth.webp',
+    alt: 'A cinematic, post-collapse landscape drawing on Hindu mythology, with monumental architecture and atmospheric light.',
+    className: 'cv-myth',
+  },
+];
+
+export default function CreativeScenes() {
+  const sectionRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia();
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        const frames = gsap.utils.toArray('.cv-chapter');
+        frames.forEach((frame) => {
+          const picture = frame.querySelector('.cv-picture img');
+          const line = frame.querySelector('.cv-progress-fill');
+          gsap.fromTo(picture, { yPercent: -5, scale: 1.05 }, {
+            yPercent: 5,
+            scale: 1.01,
+            ease: 'none',
+            scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: 1.2 },
+          });
+          gsap.fromTo(line, { scaleX: 0 }, {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: frame, start: 'top 85%', end: 'bottom 35%', scrub: 0.6 },
+          });
+          gsap.from(frame.querySelectorAll('.cv-content > *'), {
+            y: 24,
+            duration: 1,
+            stagger: 0.09,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: frame, start: 'top 85%', once: true },
+          });
+        });
+      }, sectionRef);
+      return () => context.revert();
+    });
+    return () => media.revert();
+  }, []);
+
+  return (
+    <section className="cv-worlds" id="worlds" aria-labelledby="cv-heading" ref={sectionRef}>
+      <div className="cv-intro">
+        <p className="cv-eyebrow"><span className="cv-status-dot" /> 02 / Inside our imagination</p>
+        <div className="cv-intro-grid">
+          <h2 id="cv-heading">Indian stories.<br /><em>New dimensions.</em></h2>
+          <div className="cv-intro-copy">
+            <p>Unmistakable characters. Impossible places. Entire worlds waiting to be played. This is where our imagination goes.</p>
+            <span className="cv-concept-note">World explorations / Concept art</span>
+          </div>
+        </div>
+        <nav className="cv-scene-nav" aria-label="Explore our creative worlds">
+          {directions.map((direction) => <a href={`#world-${direction.number}`} key={direction.number}><span>{direction.number}</span>{direction.name}<ArrowDownRight aria-hidden="true" size={16} /></a>)}
+        </nav>
+      </div>
+
+      <div className="cv-chapters">
+        {directions.map((direction) => (
+          <article className={`cv-chapter ${direction.className}`} id={`world-${direction.number}`} key={direction.number} aria-labelledby={`cv-title-${direction.number}`}>
+            <div className="cv-chapter-rail">
+              <span className="cv-number">{direction.number}</span>
+              <span>{direction.name}</span>
+              <ArrowDownRight aria-hidden="true" size={19} strokeWidth={1.4} />
+            </div>
+            <div className="cv-content">
+              <span className="cv-chapter-label">Anthill imagination / {direction.number}</span>
+              <span className="cv-ghost-number" aria-hidden="true">{direction.number}</span>
+              <h3 id={`cv-title-${direction.number}`}>{direction.title}</h3>
+              <p>{direction.description}</p>
+              <div className="cv-field-notes" aria-label="Creative direction">
+                {direction.notes.map((note) => <span key={note}>{note}</span>)}
+              </div>
+            </div>
+            <figure className="cv-picture">
+              <img src={`/assets/${direction.image}`} alt={direction.alt} loading="lazy" width="695" height="860" />
+              <figcaption><span>World exploration / Concept art</span><span>{direction.number} / 03</span></figcaption>
+            </figure>
+            <div className="cv-progress" aria-hidden="true"><span className="cv-progress-fill" /></div>
+          </article>
+        ))}
+      </div>
+      <div className="cv-outro">
+        <span className="cv-eyebrow">Origin: India / Reach: everywhere</span>
+        <p>Our imagination<br /><em>has no borders.</em></p>
+        <img src="/assets/official-symbol.webp" alt="" width="70" height="73" loading="lazy" />
+      </div>
+    </section>
+  );
+}
