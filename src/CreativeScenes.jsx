@@ -77,12 +77,12 @@ export default function CreativeScenes() {
 
   return (
     <section className="cv-worlds" id="worlds" aria-labelledby="cv-heading" ref={sectionRef}>
-      <div className="cv-intro">
+      <div className="cv-intro" data-entrance>
         <p className="cv-eyebrow"><span className="cv-status-dot" /> 02 / Inside our imagination</p>
         <div className="cv-intro-grid">
-          <h2 id="cv-heading">Indian stories.<br /><em>New dimensions.</em></h2>
+          <h2 id="cv-heading">Familiar soul.<br /><em>Uncharted worlds.</em></h2>
           <div className="cv-intro-copy">
-            <p>Unmistakable characters. Impossible places. Entire worlds waiting to be played. This is where our imagination goes.</p>
+            <p>The swagger. The spectacle. The stories that become part of us. A glimpse of how Indian cinema can open up entirely new worlds of play.</p>
             <span className="cv-concept-note">World explorations / Concept art</span>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function CreativeScenes() {
           </article>
         ))}
       </div>
-      <div className="cv-outro">
+      <div className="cv-outro" data-entrance>
         <span className="cv-eyebrow">Origin: India / Reach: everywhere</span>
         <p>Our imagination<br /><em>has no borders.</em></p>
         <img src="/assets/official-symbol.webp" alt="" width="70" height="73" loading="lazy" />

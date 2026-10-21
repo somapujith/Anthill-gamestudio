@@ -13,9 +13,9 @@ const stages = [
 ];
 
 const disciplines = [
-  { number: '01', title: 'ROOTED HERE.', accent: 'BUILT TO TRAVEL.', text: 'Indian imagination is our starting point. The ambition is to create worlds that connect across cultures.', label: 'OUR PERSPECTIVE' },
-  { number: '02', title: 'MANY MINDS.', accent: 'ONE WORLD.', text: 'Storytellers, artists and game makers bring different perspectives to the same creative challenge.', label: 'OUR WAY OF WORKING' },
-  { number: '03', title: 'FEEL EVERY', accent: 'DETAIL.', text: 'From the first visual to the smallest interaction, we believe a world should feel considered, coherent and alive.', label: 'OUR CREATIVE STANDARD' },
+  { number: '01', title: 'INDIAN SOUL.', accent: 'GLOBAL AMBITION.', text: 'The deeper essence of Indian cinema is our starting point. Its emotion, characters and cultural power deserve original worlds audiences everywhere can make their own.', label: 'OUR SOURCE' },
+  { number: '02', title: 'FINNISH CRAFT.', accent: 'EVERY DETAIL.', text: 'Finnish game-making expertise brings our ambition to life. From worldbuilding to the feeling of play, the craft must be as powerful as the story.', label: 'OUR DISCIPLINE' },
+  { number: '03', title: 'SET THE', accent: 'STANDARD.', text: 'Our ambition is to build the definitive games of Indian storytelling. Worlds made to a standard the world will measure itself against.', label: 'OUR CONVICTION' },
 ];
 
 export default function PartnershipStory() {
@@ -30,7 +30,7 @@ export default function PartnershipStory() {
         gsap.to('.sc-signal-travel', { xPercent: 680, duration: 4.5, repeat: -1, repeatDelay: 1, ease: 'power1.inOut' });
         gsap.to('.sc-blueprint-grid', { backgroundPosition: '48px 48px', duration: 9, repeat: -1, ease: 'none' });
         gsap.utils.toArray('.sc-principle').forEach((el) => {
-          gsap.from(el.querySelector('.sc-principle-title'), { x: -22, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+          gsap.from(el, { y: 28, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
         });
       });
     }, root);
@@ -48,12 +48,12 @@ export default function PartnershipStory() {
 
   return <div ref={root} className="sc-studio">
     <section id="approach" className="sc-approach" aria-labelledby="sc-approach-title">
-      <div className="sc-section-top"><span><i /> INSIDE THE STUDIO</span><span>03 / THE PROCESS</span></div>
-      <div className="sc-heading-row">
+      <div className="sc-section-top" data-entrance><span><i /> INSIDE THE STUDIO</span><span>03 / THE PROCESS</span></div>
+      <div className="sc-heading-row" data-entrance>
         <h2 id="sc-approach-title">FROM A SPARK.<br /><em>TO A WORLD.</em></h2>
-        <p>Our creative approach brings story, worldbuilding and the feeling of play into the same conversation. Explore how the pieces come together.</p>
+        <p>A film makes you feel a world. A game lets you live it. We carry the emotion of Indian storytelling into every character, environment and moment of play.</p>
       </div>
-      <div className={`sc-workbench sc-workbench--${stage}`}>
+      <div className={`sc-workbench sc-workbench--${stage}`} data-entrance>
         <div className="sc-workbench-label"><span><Crosshair size={17} aria-hidden="true" /> CREATIVE BLUEPRINT</span><span>ANTHILL / {current.number}</span></div>
         <div className="sc-stage-navigation" aria-label="Explore our creative process">
           {stages.map((item, index) => <button type="button" key={item.word} className={stage === index ? 'is-active' : ''} aria-pressed={stage === index} onClick={() => setStage(index)}><span>{item.number}</span><strong>{item.word}</strong><ArrowUpRight aria-hidden="true" size={22} /></button>)}
@@ -79,12 +79,12 @@ export default function PartnershipStory() {
       </div>
     </section>
     <section id="model" className="sc-craft" aria-labelledby="sc-craft-title">
-      <div className="sc-section-top"><span><i /> THE ANTHILL MINDSET</span><span>04 / OUR DNA</span></div>
-      <div className="sc-craft-heading"><span className="sc-eyebrow">NO SMALL WORLDS.</span><h2 id="sc-craft-title">BIG IDEAS.<br /><span>DEEP CRAFT.</span></h2><p>A studio is more than a name on a screen. It is a way of seeing, making and bringing people together.</p></div>
+      <div className="sc-section-top" data-entrance><span><i /> THE ANTHILL MINDSET</span><span>04 / OUR DNA</span></div>
+      <div className="sc-craft-heading" data-entrance><span className="sc-eyebrow">THE ANTHILL CONVICTION.</span><h2 id="sc-craft-title">OUR STORIES.<br /><span>A NEW STANDARD.</span></h2><p>The definitive games of Indian storytelling. Built with the ambition to set a global standard.</p></div>
       <div className="sc-principles">
         {disciplines.map(item => <article className="sc-principle" key={item.number}><div className="sc-principle-index"><span>{item.number}</span><MoveUpRight size={30} strokeWidth={1.3} aria-hidden="true" /></div><h3 className="sc-principle-title">{item.title}<br /><em>{item.accent}</em></h3><div className="sc-principle-copy"><span className="sc-eyebrow">{item.label}</span><p>{item.text}</p></div></article>)}
       </div>
-      <div className="sc-craft-signoff"><span>INDIAN ROOTS.</span><span>BOUNDLESS IMAGINATION.</span><ArrowUpRight size={26} aria-hidden="true" /></div>
+      <div className="sc-craft-signoff" data-entrance><span>INDIAN ROOTS.</span><span>BOUNDLESS IMAGINATION.</span><ArrowUpRight size={26} aria-hidden="true" /></div>
     </section>
   </div>;
 }

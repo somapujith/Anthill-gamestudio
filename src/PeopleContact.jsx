@@ -86,7 +86,7 @@ export default function PeopleContact() {
           </div>
         </article>)}
       </div>
-      <p className="pc-people-note"><span aria-hidden="true">↳</span> Many perspectives. One creative ambition.</p>
+      <p className="pc-people-note pc-reveal"><span aria-hidden="true">↳</span> Many perspectives. One creative ambition.</p>
     </section>
 
     <section id="contact" className="pc-contact" aria-labelledby="pc-contact-title">
@@ -107,7 +107,7 @@ export default function PeopleContact() {
           </div>)}
         </div>
       </div>
-      <div className="pc-contact-bottom"><span>ROOTED IN INDIA. BUILT FOR THE WORLD.</span><span>STORIES WORTH PLAYING.</span></div>
+      <div className="pc-contact-bottom pc-reveal"><span>ROOTED IN INDIA. BUILT FOR THE WORLD.</span><span>STORIES WORTH PLAYING.</span></div>
     </section>
   </div>;
 }

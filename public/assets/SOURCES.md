@@ -54,4 +54,11 @@ Source: user-provided `Anthill Ventures Logo.png` (1010 x 240 RGBA). `official-l
 - Font information: https://fonts.google.com/specimen/Oxanium and https://fonts.google.com/specimen/Space+Grotesk
 - SIL Open Font Licenses are preserved as `oxanium-OFL.txt` and `spacegrotesk-OFL.txt`, from the official google/fonts repository.
 - `rana-daggubati.webp` and `prasad-vanga.webp`: formal portraits from official Anthill Ventures profiles. Exact original image URLs and biography references are in `people-sources.md`.
-- Bodoni Moda and DM Sans files are retained from the prior design and are not loaded by the current website.
+- Bodoni Moda files are retained from the prior design and are not loaded by the current website.
+
+## Cinema-led redesign typography
+
+- `anton.woff2`: Anton regular, Latin subset. Downloaded from the official Google Fonts CSS API and Google Fonts CDN for the October 2026 redesign. Source: https://fonts.googleapis.com/css2?family=Anton&display=swap and https://fonts.gstatic.com/s/anton/v27/1Ptgg87LROyAm3Kz-C8.woff2
+- `anton-OFL.txt`: SIL Open Font License from https://github.com/google/fonts/blob/main/ofl/anton/OFL.txt
+- The active type system uses Anton for film-poster display headings, existing DM Sans for readable body text and Space Mono for supporting labels. Oxanium and Space Grotesk remain archived assets.
+- The scroll-driven cinematic sequence reuses the supplied `mass-heroes.webp` concept art. No new commercial film imagery or generated portraits are introduced.
