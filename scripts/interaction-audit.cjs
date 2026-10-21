@@ -6,7 +6,7 @@ async (page) => {
   for(const width of [320,768,1440]){
     await page.setViewportSize({width,height:900});
     await page.goto(origin);
-    await page.waitForFunction(()=>getComputedStyle(document.querySelector('.hero-links')).opacity==='1');
+    await page.waitForFunction(()=>{const links=document.querySelector('.hero-links');return links&&getComputedStyle(links).opacity==='1';});
     const stages=[],invitations=[];
     for(let index=0;index<3;index++){
       const button=page.locator('.sc-stage-navigation button').nth(index);
@@ -45,7 +45,7 @@ async (page) => {
   }
   await page.setViewportSize({width:390,height:844});
   await page.goto(origin);
-  await page.waitForFunction(()=>getComputedStyle(document.querySelector('.hero-links')).opacity==='1');
+  await page.waitForFunction(()=>{const links=document.querySelector('.hero-links');return links&&getComputedStyle(links).opacity==='1';});
   await page.getByRole('button',{name:'Open navigation'}).click();
   await page.getByRole('navigation',{name:'Mobile navigation'}).getByRole('link',{name:/Our craft/}).click();
   await page.waitForFunction(()=>{const top=document.getElementById('approach').getBoundingClientRect().top;return top>=-10&&top<200;});

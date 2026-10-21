@@ -1,0 +1,11 @@
+.studio-intro{position:fixed;inset:0;z-index:150;display:grid;place-items:center;isolation:isolate;background:var(--ink);color:var(--cream);overflow:hidden}
+.intro-ambient{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 54%,#f3443109,transparent 60%);pointer-events:none}
+.intro-preload{display:none}
+.intro-lockup{display:flex;align-items:center;gap:clamp(14px,2.5vw,38px);width:max-content;max-width:calc(100% - 44px);position:relative;isolation:isolate}
+.intro-anthill{display:flex;align-items:center;gap:clamp(10px,1.5vw,24px);flex-shrink:0;font:400 clamp(40px,9vw,132px)/1.1 var(--font-display);letter-spacing:-.025em;will-change:transform}
+.intro-anthill img{width:clamp(154px,29vw,420px);height:auto;object-fit:contain}
+.intro-game-studios{flex-shrink:0;font:400 clamp(18px,3.8vw,58px)/1.25 var(--font-display);letter-spacing:.01em;white-space:nowrap;opacity:0;visibility:hidden;clip-path:inset(0 100% 0 0);padding:.15em .25em .15em 0}
+.intro-tagline{position:absolute;bottom:16vh;left:22px;right:22px;text-align:center;color:#979d8b;font:11px/1.7 var(--font-mono);letter-spacing:.1em}
+.intro-skip{position:absolute;bottom:30px;right:5vw;min-height:44px;display:flex;align-items:center;gap:18px;padding:10px 0;background:transparent;color:#adb3a1;font:12px/1.5 var(--font-body)}
+.intro-skip:hover{color:var(--cream)}.intro-skip>span{color:var(--red)}
+@media(max-width:600px){.intro-tagline{bottom:20vh;font-size:10px}.intro-skip{right:22px;bottom:20px}.intro-lockup{gap:14px}.intro-anthill{gap:10px}.intro-game-studios{padding-right:0}}

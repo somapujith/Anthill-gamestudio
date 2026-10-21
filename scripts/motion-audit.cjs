@@ -10,7 +10,7 @@ async (page) => {
   for (const size of sizes) {
     await page.setViewportSize(size);
     await page.goto(new URL(page.url()).origin);
-    await page.waitForFunction(() => getComputedStyle(document.querySelector('.hero-links')).opacity === '1');
+    await page.waitForFunction(() => { const links = document.querySelector('.hero-links'); return links && getComputedStyle(links).opacity === '1'; });
     await page.evaluate(() => document.fonts.ready);
     const initial = await page.locator(selectors).evaluateAll(elements => ({count:elements.length,hidden:elements.filter(e => Number(getComputedStyle(e).opacity) < .1).length}));
     assert(initial.hidden > 10, `Missing scroll entrances at ${size.width}x${size.height}`);

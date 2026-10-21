@@ -77,7 +77,7 @@ async (page) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(origin);
-  await page.waitForFunction(() => getComputedStyle(document.querySelector('.hero-links')).opacity === '1');
+  await page.waitForFunction(() => { const links = document.querySelector('.hero-links'); return links && getComputedStyle(links).opacity === '1'; });
   await settle();
   await page.screenshot({ path: 'output/playwright/ags-animated-hero.png' });
   const track = await page.locator('.cinema-scroll-track').boundingBox();

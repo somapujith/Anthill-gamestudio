@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -21,7 +21,36 @@ function Brand({ footer = false }) {
 }
 
 function HeroArtwork() {
-  return <figure className="hero-artwork hero-cinema"><div className="hero-art-frame"><img className="hero-cinema-image" src="/assets/mumbai.webp" alt="A cinematic comic-book Mumbai, with a motorcycle rider racing through its neon-lit streets." fetchPriority="high" /><div className="hero-cinema-shade" /></div><div className="hero-cinema-register"><span>INDIAN IMAGINATION.</span><span>AN ENTIRELY NEW DIMENSION.</span></div><figcaption className="hero-cinema-caption"><span>WORLD EXPLORATION / 001</span><span>CONCEPT ART</span></figcaption><span className="hero-art-cross" aria-hidden="true">+</span></figure>;
+  const artwork = useRef(null);
+
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia();
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const picture = artwork.current.querySelector('.hero-cinema-image');
+      const curtain = artwork.current.querySelector('.hero-reveal-curtain');
+      let active = true;
+      const context = gsap.context(() => {
+        gsap.set(curtain, { scaleX: 1, visibility: 'visible', transformOrigin: 'right center' });
+        gsap.set(picture, { scale: 1.12, filter: 'blur(4px)' });
+      }, artwork);
+
+      const reveal = () => {
+        if (!active) return;
+        context.add(() => {
+          gsap.timeline()
+            .to(curtain, { scaleX: 0, duration: 1.65, ease: 'power2.inOut' }, .1)
+            .to(picture, { scale: 1.02, filter: 'blur(0px)', duration: 2.2, ease: 'power2.out' }, 0)
+            .set(curtain, { visibility: 'hidden' }, 1.8)
+            .to(picture, { scale: 1.08, yPercent: -1, duration: 14, repeat: -1, yoyo: true, ease: 'sine.inOut' }, 2.2);
+        });
+      };
+      picture.decode().then(reveal, reveal);
+      return () => { active = false; context.revert(); };
+    });
+    return () => media.revert();
+  }, []);
+
+  return <figure className="hero-artwork hero-cinema" ref={artwork}><div className="hero-art-frame"><img className="hero-cinema-image" src="/assets/mumbai.webp" alt="A cinematic comic-book Mumbai, with a motorcycle rider racing through its neon-lit streets." fetchPriority="high" /><div className="hero-cinema-shade" /><div className="hero-reveal-curtain" aria-hidden="true" /></div><div className="hero-cinema-register"><span>INDIAN IMAGINATION.</span><span>AN ENTIRELY NEW DIMENSION.</span></div><figcaption className="hero-cinema-caption"><span>WORLD EXPLORATION / 001</span><span>CONCEPT ART</span></figcaption><span className="hero-art-cross" aria-hidden="true">+</span></figure>;
 }
 
 function Conviction() {
@@ -39,7 +68,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState('');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const lenis = new Lenis({ duration: 1.05, anchors: true, smoothWheel: true });
@@ -49,7 +78,10 @@ export default function App() {
       const tick = time => lenis.raf(time * 1000);
       gsap.ticker.add(tick);
       const ctx = gsap.context(() => {
-        gsap.timeline({ defaults: { ease: 'power3.out' } }).from('.site-header', { y: -18, opacity: 0, duration: .6 }).from('.hero-title-line>span', { yPercent: 115, rotation: 3, duration: 1.1, stagger: .13 }, '-=.2').from('.hero-art-frame', { clipPath: 'inset(0 0 100% 0)', scale: 1.12, duration: 1.6, ease: 'power3.inOut', clearProps: 'clipPath,transform' }, '<').from('.hero-eyebrow, .hero-description, .hero-links, .hero-bottom, .hero-cinema-register, .hero-cinema-caption', { y: 18, opacity: 0, duration: .7, stagger: .06 }, '-=.75');
+        gsap.timeline({ defaults: { ease: 'power3.out' } })
+          .from('.site-header', { y: -12, opacity: 0, duration: .45 }, 0)
+          .fromTo('.hero-title-line>span', { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .9, stagger: .1, force3D: false, clearProps: 'transform,opacity,visibility' }, .08)
+          .from('.hero-eyebrow, .hero-description, .hero-links, .hero-bottom, .hero-cinema-register, .hero-cinema-caption', { y: 18, opacity: 0, duration: .7, stagger: .05 }, .24);
         gsap.to('.hero-artwork', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
         gsap.utils.toArray('[data-entrance]').forEach(el => gsap.from(el, { y: 32, opacity: 0, duration: .9, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'clamp(top 94%)', once: true } }));
         gsap.from('[data-intro-heading]>span', { x: -35, opacity: 0, stagger: .12, duration: .9, scrollTrigger: { trigger: '.conviction-main', start: 'top 88%', once: true } });
