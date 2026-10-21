@@ -34,15 +34,15 @@ function StudioIntro({ onComplete }) {
         .to(anthill, { x: 0, duration: .7, ease: 'power3.inOut' }, 1)
         .fromTo(companion, { autoAlpha: 0, x: 22, clipPath: 'inset(0 100% 0 0)' }, { autoAlpha: 1, x: 0, clipPath: 'inset(0 0% 0 0)', duration: .8, ease: 'power3.out' }, 1.2)
         .call(() => setShine(true), [], 1.45)
-        .to(element, { opacity: 0, duration: .5, ease: 'power2.inOut' }, 3.05);
+        .to(element, { opacity: 0, duration: .5, ease: 'power2.inOut' }, 4.5);
     }, root);
 
     document.fonts.ready.then(() => {
       if (alive && performance.now() - started < 800) context.add(() => gsap.set(anthill, { x: centerOffset() }));
     });
-    const deadline = window.setTimeout(finish, 3700);
+    const deadline = window.setTimeout(finish, 5000);
     const onPreference = () => { if (reduced.matches) finish(); };
-    const onVisibility = () => { if (!document.hidden && performance.now() - started >= 3700) finish(); };
+    const onVisibility = () => { if (!document.hidden && performance.now() - started >= 5000) finish(); };
     const onKey = event => {
       if (event.key === 'Escape') finish();
       if (event.key === 'Tab') { event.preventDefault(); element.querySelector('button').focus(); }

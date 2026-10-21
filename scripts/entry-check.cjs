@@ -34,12 +34,19 @@ async (page) => {
     await page.waitForTimeout(120);
     const gradient=await page.locator('.shiny-text').evaluate(e=>getComputedStyle(e).backgroundImage);
     assert(gradient!==revealed.gradient,'ShinyText gradient is not animating');
-    await page.waitForFunction(()=>!document.querySelector('.studio-intro'),null,{polling:'raf',timeout:2500});
+    await page.waitForTimeout(Math.max(0,4200-(Date.now()-started)));
+    const held=await page.evaluate(()=>({
+      introOpacity:Number(getComputedStyle(document.querySelector('.studio-intro')).opacity),
+      studioOpacity:Number(getComputedStyle(document.querySelector('.intro-game-studios')).opacity),
+      siteMounted:!!document.querySelector('.site-shell'),
+    }));
+    assert(held.introOpacity>.99&&held.studioOpacity>.99&&!held.siteMounted,'GAME STUDIOS did not remain visible for the remaining intro time');
+    await page.waitForFunction(()=>!document.querySelector('.studio-intro'),null,{polling:'raf',timeout:1500});
     const duration=Date.now()-started;
-    assert(duration<4000,`Shortened intro exceeds four seconds: ${duration}ms`);
+    assert(duration>=4800&&duration<5200,`Intro should finish at five seconds: ${duration}ms`);
     await page.locator('.hero-art-frame').waitFor();
     assert(await page.evaluate(()=>document.body.style.overflow!=='hidden'),'Intro left scrolling locked');
-    results.push({width,initial,revealed:{...revealed,gradient:undefined},duration});
+    results.push({width,initial,revealed:{...revealed,gradient:undefined},held,duration});
   }
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.reload();
