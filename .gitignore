@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.playwright-cli/
+output/
+tmp/
+*.local
+
+.vercel
+*.pdf

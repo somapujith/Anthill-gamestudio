@@ -1,0 +1,25 @@
+/* Motion is decorative and confined to clipped artwork or fixed UI. */
+.fx-scroll-progress{position:fixed;inset:0 auto auto 0;width:100%;height:2px;z-index:90;pointer-events:none;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--pink,#ff328b),var(--lime,#d3ff43));box-shadow:0 0 12px #ff328b55}
+.fx-hero-atmosphere{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:paint}
+.fx-hero-light{position:absolute;inset:0;opacity:0;background:radial-gradient(ellipse 34% 50% at calc(var(--pointer-x,70) * 1%) calc(var(--pointer-y,45) * 1%),#ff328b12,transparent 75%);transition:opacity 1s}
+.fx-pixel{position:absolute;width:var(--fx-size);height:var(--fx-size);background:var(--pink,#ff328b);opacity:0;box-shadow:0 0 10px currentColor;animation:fx-pixel-float var(--fx-duration) var(--fx-delay) ease-in-out infinite;color:#ff328b}
+.fx-pixel:nth-of-type(3n){color:#d3ff43;background:#d3ff43}.fx-pixel:nth-of-type(4n){color:#ffe83d;background:#ffe83d}
+.fx-orbit{position:absolute;width:340px;height:340px;right:7%;top:18%;border:1px solid #ff328b0c;border-radius:50%;opacity:0;animation:fx-orbit-breathe 10s ease-in-out infinite}
+.fx-orbit-two{width:480px;height:480px;right:1%;top:8%;border-color:#d3ff4309;animation-delay:-5s}
+.fx-motion-on .fx-hero-light{opacity:1}.fx-motion-on .pink-period{animation:fx-period-breathe 4s ease-in-out infinite}
+.fx-motion-on .live-dot{animation:fx-signal 3.5s ease-in-out infinite}.fx-motion-on .scroll-cue svg{animation:fx-arrow-drift 2s ease-in-out infinite}
+.fx-motion-on .little-mark{animation:fx-mark-glow 6s ease-in-out infinite}
+.fx-magnet{transition-property:background,border-color,color,box-shadow!important}
+.fx-tilt-card{backface-visibility:hidden;transform-style:flat}
+.fx-tilt-card::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;background:radial-gradient(ellipse at var(--fx-card-x,50%) var(--fx-card-y,50%),#fff0e013,transparent 58%);transition:opacity .4s}
+.fx-tilt-card:hover::after{opacity:1}
+.overlay-open .fx-scroll-progress{opacity:0}
+.overlay-open .fx-pixel,.overlay-open .fx-orbit,.overlay-open .pink-period,.overlay-open .live-dot,.overlay-open .scroll-cue svg,.overlay-open .little-mark{animation-play-state:paused}
+@keyframes fx-pixel-float{0%,100%{transform:translate3d(0,12px,0);opacity:0}25%{opacity:.45}70%{opacity:.14}85%{transform:translate3d(12px,-36px,0);opacity:0}}
+@keyframes fx-orbit-breathe{0%,100%{transform:scale(.9);opacity:0}50%{transform:scale(1.04);opacity:1}}
+@keyframes fx-period-breathe{0%,100%{text-shadow:0 0 0 #ff328b00}50%{text-shadow:0 0 22px #ff328b80}}
+@keyframes fx-signal{0%,100%{box-shadow:0 0 0 0 #d3ff4300}50%{box-shadow:0 0 0 5px #d3ff4315,0 0 12px #d3ff4340}}
+@keyframes fx-arrow-drift{0%,100%{transform:translateY(-2px)}50%{transform:translateY(4px)}}
+@keyframes fx-mark-glow{0%,100%{filter:drop-shadow(0 0 0 #d3ff4300)}50%{filter:drop-shadow(0 0 8px #d3ff4360)}}
+@media(max-width:800px){.fx-pixel:nth-of-type(even){display:none}.fx-orbit{display:none}.fx-pixel{opacity:0}.fx-hero-light{background:radial-gradient(ellipse 55% 45% at 80% 65%,#ff328b0c,transparent 75%)}}
+@media(prefers-reduced-motion:reduce){.fx-hero-atmosphere{display:none!important}.fx-scroll-progress{box-shadow:none}.fx-motion-on .pink-period,.fx-motion-on .live-dot,.fx-motion-on .scroll-cue svg,.fx-motion-on .little-mark{animation:none!important}}
