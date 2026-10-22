@@ -1,0 +1,11 @@
+/* Pixel lockup and stepped symbol extracted from the supplied studio identity deck. */
+.brand-lockup > img{width:190px;height:auto;object-fit:contain}
+.brand-lockup-footer > img{width:260px}
+.intro-lockup{gap:clamp(16px,3vw,44px)}
+.intro-anthill img{width:clamp(68px,12vw,156px);height:auto}
+.intro-game-studios{padding:0;line-height:0}
+.intro-game-studios img{display:block;width:clamp(180px,32vw,428px);height:auto}
+.conviction-mark{filter:brightness(0);opacity:.05}
+.pc-contact-mark{height:auto;aspect-ratio:128/124;filter:none}
+@media(max-width:600px){.brand-lockup > img{width:170px}.brand-lockup-footer > img{width:230px}.intro-lockup{gap:16px}}
+@media(max-width:360px){.brand-lockup > img{width:156px}}

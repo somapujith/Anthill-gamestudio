@@ -41,6 +41,6 @@ export default function CinemaSequence() {
       <div className="cinema-progress" aria-hidden="true"><span /></div>
       <div className="cinema-bottom"><span>FROM AUDIENCE TO PLAYER.</span><ArrowDownRight size={30} /><span>ILLUSTRATIVE WORLD / CONCEPT ART</span></div>
     </div></div>
-    <div className="craft-connection"><div data-entrance><span className="eyebrow">TWO CREATIVE FORCES. ONE EXTRAORDINARY AMBITION.</span><p>INDIA <span>×</span> FINLAND</p></div><div className="craft-connection-copy" data-entrance><p>Original worlds. Unmistakable emotion. Indian storytelling meets Finnish game craft at its highest level.</p><a href="#approach">Meet the mindset <ArrowUpRight size={20} /></a></div></div>
+    <div className="craft-connection"><div data-entrance><span className="eyebrow">TWO CREATIVE FORCES. ONE EXTRAORDINARY AMBITION.</span><p>INDIA <span>×</span> THE NORDICS</p></div><div className="craft-connection-copy" data-entrance><p>Original worlds. Unmistakable emotion. Indian storytelling meets Nordic game craft at its highest level.</p><a href="#approach">Meet the mindset <ArrowUpRight size={20} /></a></div></div>
   </section>;
 }

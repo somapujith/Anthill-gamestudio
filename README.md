@@ -23,8 +23,8 @@ Open http://localhost:4174/ and use normal browser zoom. All artwork and fonts a
 The opening uses the supplied Anthill Ventures logo, centered for one second before it moves aside to reveal “GAME STUDIOS” with the supplied React Bits ShinyText effect. GAME STUDIOS stays visible and shining for the remaining intro time. The intro fades between 4.5 and 5 seconds, with a five-second deadline, before the website animations begin. Skip intro and Escape dismiss it immediately; reduced motion bypasses it. The hero image preloads during the intro, waits for decoding, then opens with a continuous curtain wipe and a gentle camera settle.
 
 1. A film-poster opening built around “Stories worth playing,” with Anton typography and a masked artwork reveal.
-2. A light editorial manifesto connecting Indian cinema, Finnish game craft and worldwide ambition.
-3. A scroll-driven cinematic scene that moves from characters becoming culture to players living the story, followed by the India × Finland proposition.
+2. A light editorial manifesto connecting Indian cinema, Nordic game craft and worldwide ambition.
+3. A scroll-driven cinematic scene that moves from characters becoming culture to players living the story, followed by the India × the Nordics proposition.
 4. Three animated world explorations, clearly identified as concept art, and an interactive creative workbench exploring story, world and play.
 5. Formal portraits of Rana Daggubati and Prasad Vanga from their official Anthill Ventures profiles.
 6. Invitations for storytellers, creators and industry collaborators, with working email links.

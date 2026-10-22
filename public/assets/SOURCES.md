@@ -1,5 +1,9 @@
 # Asset sources
 
+## Pixel studio logo
+
+`studio-logo.webp` is the Anthill Game Studios pixel lockup extracted from the top-left of page 1 of the supplied `Anthill-Game-Studios-Identity.pdf`. Its dark presentation backdrop is removed with a luminance alpha mask, retaining the original stepped symbol and lettering in cream. `studio-symbol.webp` and `studio-wordmark.webp` split that same lockup at its existing gap for the introductory reveal. All three use lossless WebP and are used for the studio branding.
+
 Illustrations come from the supplied Anthill identity document. The official logo was supplied separately by the user. Current people photography comes from Anthill Ventures' official profiles; see people-sources.md. No generated people photography is used.
 
 ## Anthill brand illustrations

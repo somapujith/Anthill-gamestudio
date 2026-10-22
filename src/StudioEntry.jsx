@@ -1,12 +1,10 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import App from './App.jsx';
-import ShinyText from './ShinyText.jsx';
 import './studio-intro.css';
 
 function StudioIntro({ onComplete }) {
   const root = useRef(null);
-  const [shine, setShine] = useState(false);
 
   useLayoutEffect(() => {
     const element = root.current;
@@ -33,7 +31,6 @@ function StudioIntro({ onComplete }) {
         .from(anthill, { opacity: 0, y: 12, duration: .5, ease: 'power2.out' }, 0)
         .to(anthill, { x: 0, duration: .7, ease: 'power3.inOut' }, 1)
         .fromTo(companion, { autoAlpha: 0, x: 22, clipPath: 'inset(0 100% 0 0)' }, { autoAlpha: 1, x: 0, clipPath: 'inset(0 0% 0 0)', duration: .8, ease: 'power3.out' }, 1.2)
-        .call(() => setShine(true), [], 1.45)
         .to(element, { opacity: 0, duration: .5, ease: 'power2.inOut' }, 4.5);
     }, root);
 
@@ -65,8 +62,8 @@ function StudioIntro({ onComplete }) {
     <img className="intro-preload" src="/assets/mumbai.webp" alt="" aria-hidden="true" fetchPriority="high" />
     <div className="intro-ambient" aria-hidden="true" />
     <div className="intro-lockup">
-      <div className="intro-anthill"><img src="/assets/official-logo.webp" width="613" height="212" alt="Anthill Ventures" /></div>
-      <div className="intro-game-studios"><ShinyText text="GAME STUDIOS" color="#a5ac99" shineColor="#ffffff" speed={1.3} shineWidth={40} softness={.8} glow={.25} direction="right" disabled={!shine} /></div>
+      <div className="intro-anthill"><img src="/assets/studio-symbol.webp" width="128" height="124" alt="" /></div>
+      <div className="intro-game-studios"><img src="/assets/studio-wordmark.webp" width="340" height="125" alt="Anthill Game Studios" /></div>
     </div>
     <p className="intro-tagline">STORIES WORTH PLAYING.</p>
     <button className="intro-skip" type="button" onClick={onComplete}>Skip intro <span aria-hidden="true">↗</span></button>

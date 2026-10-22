@@ -119,7 +119,7 @@ export default function CreativeScenes() {
       <div className="cv-outro" data-entrance>
         <span className="cv-eyebrow">Origin: India / Reach: everywhere</span>
         <p>Our imagination<br /><em>has no borders.</em></p>
-        <img src="/assets/official-symbol.webp" alt="" width="70" height="73" loading="lazy" />
+        <img src="/assets/studio-symbol.webp" alt="" width="70" height="73" loading="lazy" />
       </div>
     </section>
   );

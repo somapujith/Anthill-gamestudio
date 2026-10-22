@@ -14,7 +14,7 @@ const stages = [
 
 const disciplines = [
   { number: '01', title: 'INDIAN SOUL.', accent: 'GLOBAL AMBITION.', text: 'The deeper essence of Indian cinema is our starting point. Its emotion, characters and cultural power deserve original worlds audiences everywhere can make their own.', label: 'OUR SOURCE' },
-  { number: '02', title: 'FINNISH CRAFT.', accent: 'EVERY DETAIL.', text: 'Finnish game-making expertise brings our ambition to life. From worldbuilding to the feeling of play, the craft must be as powerful as the story.', label: 'OUR DISCIPLINE' },
+  { number: '02', title: 'NORDIC CRAFT.', accent: 'EVERY DETAIL.', text: 'Nordic game-making expertise brings our ambition to life. From worldbuilding to the feeling of play, the craft must be as powerful as the story.', label: 'OUR DISCIPLINE' },
   { number: '03', title: 'SET THE', accent: 'STANDARD.', text: 'Our ambition is to build the definitive games of Indian storytelling. Worlds made to a standard the world will measure itself against.', label: 'OUR CONVICTION' },
 ];
 
