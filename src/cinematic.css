@@ -31,3 +31,5 @@
 .hero-spark{margin-right:.25em}
 @media(max-width:600px){.hero-origin{font-family:var(--font-body);font-weight:500}.hero-cinema-caption{gap:12px}.hero-cinema-caption>span:first-child{max-width:155px}.hero-cinema-caption>span:last-child{text-align:right}.cinema-statement h2{font-size:15vw}.pc-people-grid{grid-template-columns:1fr}.pc-person-2{padding-top:0}}
 @media(max-width:900px),(max-height:699px){.cinema-meta,.cinema-bottom{left:auto;right:auto;margin-inline:5vw}.cinema-sticky{height:auto;min-height:0}.cinema-statements{display:block;height:auto}.cinema-second{opacity:1;margin-top:55px;padding-top:45px;border-top:1px solid #f0eee640}.cinema-meta{position:relative;top:auto;padding-top:30px}.cinema-bottom{position:relative;bottom:auto;padding-bottom:30px}.cinema-progress{display:none}}
+
+.craft-location{display:block;margin-top:16px;font:12px/1.6 var(--font-mono);letter-spacing:.04em}
