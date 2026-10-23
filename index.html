@@ -1,17 +1,118 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#10110f" />
-    <meta name="description" content="Anthill Game Studios. Based in Helsinki, Finland, and Hyderabad, India. Stories worth playing. Original worlds born from Indian cinema, powered by Nordic game craft. Bringing the magic of Indian storytelling to players everywhere." />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" href="/assets/anton.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/body.woff2" as="font" type="font/woff2" crossorigin />
-    <title>Anthill Game Studios — Stories worth playing.</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050507">
+  <title>Anthill Game Studios — Play beyond.</title>
+  <meta name="description" content="Indian imagination. Nordic game craft. Stories worth playing. Anthill Game Studios.">
+  <meta property="og:title" content="Anthill Game Studios — Play beyond."><meta property="og:description" content="Indian soul. Nordic craft. Worlds worth losing yourself in."><meta property="og:type" content="website">
+  <link rel="icon" href="/assets/ags-red-metal-v8.webp" type="image/webp">
+  <link rel="preload" href="/assets/anthill-punch-v6.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/assets/nimbus-sans-bold-v6.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="/assets/mono-regular-v2.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/assets/elephant-v6.webp" as="image">
+  <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/worlds-v5.css"><link rel="stylesheet" href="/studio-v6.css"><link rel="stylesheet" href="/studio-v7.css"><link rel="stylesheet" href="/night-v8.css"><link rel="stylesheet" href="/polish-v9.css"><script src="/app.js" defer></script><script src="/impact-v8.js" defer></script><script src="/studio-v7.js" defer></script><script src="/aurora-v8.js" defer></script><script src="/strips-v7.js" defer></script><script src="/polish-v9.js" defer></script>
+</head>
+<body class="night-studio" data-audio="impact-on-click">
+  <div class="aurora-field" aria-hidden="true"><canvas id="aurora-sky"></canvas><div class="sky-grain"></div><div class="sky-vignette"></div></div>
+  <div class="universe-frame" aria-hidden="true"><i></i><b></b></div>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="arrow" viewBox="0 0 60 60"><path d="M8 50 50 8M12 9c12 1 26 1 39-1-1 12-2 24-1 36"/></symbol>
+    <symbol id="spark" viewBox="0 0 100 100"><path d="m50 2 9 28 24-16-14 26 29 10-30 9 17 25-26-15-9 29-10-29-24 16 14-26-28-9 28-10-15-25 25 15Z"/></symbol>
+    <symbol id="pen" viewBox="0 0 32 32"><path d="m5 22-2 8 9-3L29 10 22 3 5 22Zm0 0 7 5m6-20 7 7"/></symbol>
+    <symbol id="speaker" viewBox="0 0 32 32"><path d="M3 12h6l7-6v20l-7-6H3Z M21 10c4 3 4 9 0 12 M25 6c7 5 7 15 0 20"/><path class="sound-slash" d="M5 3 29 29"/></symbol>
+    <symbol id="cross" viewBox="0 0 32 32"><path d="m6 6 20 20M26 6 6 26"/></symbol>
+  </defs></svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div><div class="scroll-red" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <header class="masthead">
+    <a class="brand" href="#opening" aria-label="Anthill Game Studios — beginning" title="Anthill Game Studios"><span class="brand-mark"><img src="/assets/ags-red-metal-v8.webp" alt="" width="1536" height="1024"><i aria-hidden="true"></i></span><span class="brand-word" aria-hidden="true"></span></a>
+    <span class="header-location">A STUDIO IN MOTION.<br>HYDERABAD ↔ HELSINKI</span>
+    <nav aria-label="Main navigation"><a href="#worlds">The vibe <span>↗</span></a><a href="#hello">Meet the team <span>↗</span></a></nav>
+    <button class="ambient-toggle" type="button" data-strip-toggle aria-label="Pause ambient animations" aria-pressed="false" title="Pause ambient animations">Ⅱ</button>
+    <button class="scribble-toggle" type="button" aria-label="Open scribble mode" aria-pressed="false"><svg><use href="#pen"/></svg><span>Scribble</span></button>
+  </header>
+  <nav class="chapter-nav" aria-label="Four chapters"><a href="#opening" class="current" aria-label="01 — The opening" aria-current="location"><span>01</span><i></i></a><a href="#worlds" aria-label="02 — The vibe"><span>02</span><i></i></a><a href="#mindset" aria-label="03 — The vision"><span>03</span><i></i></a><a href="#hello" aria-label="04 — The people"><span>04</span><i></i></a></nav>
+  <main id="main">
+    <section class="act opening is-active" id="opening" aria-labelledby="opening-title">
+      <div class="act-content opening-content layered-cover">
+        <div class="cover-stage layer-stage" data-layer-stage>
+          <div class="ink-bloom cover-bloom" aria-hidden="true"></div><div class="hero-glow" aria-hidden="true"><i></i><b></b></div><div class="halftone-orbit" aria-hidden="true"></div><div class="print-grain" aria-hidden="true"></div>
+          <div class="opening-topline"><i></i> ANTHILL GAME STUDIOS</div>
+          <div class="opening-type layer-type"><h1 id="opening-title">PLAY<br><span>BEYOND.</span></h1></div>
+          <div class="hero-art layer-subject"><img class="hero-character" src="/assets/elephant-v6.webp" alt="A ferocious half-elephant, half-blue-machine creature charges out of the page, its tusks reaching toward you." width="1536" height="1024" fetchpriority="high"></div>
+          <div class="opening-copy"><p>A game studio with<br>an Indian imagination.</p></div>
+          <a class="ink-button hero-cta" href="#worlds"><span>FEEL THE VIBE</span><svg><use href="#arrow"/></svg></a>
+
+        </div>
+        <div class="act-footer"><span>GOOD STORIES DON’T STAND STILL.</span><a href="#worlds"><span>NEITHER DO WE.</span><b>↓</b></a><span class="page-count">01 — 04</span></div>
+      </div>
+    </section>
+
+    <section class="act worlds" id="worlds" aria-labelledby="worlds-title">
+      <div class="act-content worlds-content">
+        <div class="chapter-strip vibe-strip" data-strip><div class="strip-grain" aria-hidden="true"></div><span class="strip-eyebrow">THE VIBE</span><h2 id="worlds-title">MORE THAN PLAY.</h2><button class="strip-motion" type="button" data-strip-toggle aria-label="Pause heading animations" aria-pressed="false">Ⅱ</button></div>
+        <p class="vibe-statement">We see games as experiences that can move people—and move the medium forward.</p>
+        <div class="world-wall">
+          <button type="button" class="world-poster" data-world="0" aria-label="Build wonder — our point of view"><span class="poster-art"><img src="/assets/mass-heroes.webp" alt="A red-jacketed pixel hero with gold sunglasses." width="695" height="860" loading="lazy"><span class="poster-bw" aria-hidden="true"><img src="/assets/mass-heroes.webp" alt="" width="695" height="860" loading="lazy"></span><span class="world-arrow"><svg><use href="#arrow"/></svg></span><span class="world-index">IMAGINATION</span><span class="poster-title"><b class="poster-strap">BUILD<br>WONDER.</b></span></span><span class="poster-caption"><b>DREAM WITHOUT LIMITS.</b><span>Let imagination run wild. ↗</span></span></button>
+          <button type="button" class="world-poster" data-world="1" aria-label="Believe the impossible — our point of view"><span class="poster-art"><img src="/assets/mumbai.webp" alt="A motorcycle rider races through comic-book Mumbai." width="755" height="860" loading="lazy"><span class="poster-bw" aria-hidden="true"><img src="/assets/mumbai.webp" alt="" width="755" height="860" loading="lazy"></span><span class="world-arrow"><svg><use href="#arrow"/></svg></span><span class="world-index">AMBITION</span><span class="poster-title"><b class="poster-strap">BELIEVE THE<br>IMPOSSIBLE.</b></span></span><span class="poster-caption"><b>MAKE IT PLAYABLE.</b><span>Give the unthinkable a chance. ↗</span></span></button>
+          <button type="button" class="world-poster" data-world="2" aria-label="Play with purpose — our point of view"><span class="poster-art"><img src="/assets/myth.webp" alt="A mythic warrior looks out across an imagined post-collapse world." width="809" height="860" loading="lazy"><span class="poster-bw" aria-hidden="true"><img src="/assets/myth.webp" alt="" width="809" height="860" loading="lazy"></span><span class="world-arrow"><svg><use href="#arrow"/></svg></span><span class="world-index">PURPOSE</span><span class="poster-title"><b class="poster-strap">PLAY WITH<br>PURPOSE.</b></span></span><span class="poster-caption"><b>LEAVE A FEELING.</b><span>Something to carry beyond the game. ↗</span></span></button>
+        </div>
+        <div class="act-footer"><span>OUR AMBITION, IN EVERY FRAME.</span><a href="#mindset"><span>WHAT DRIVES US</span><b>↓</b></a><span class="page-count">02 — 04</span></div>
+      </div>
+    </section>
+
+    <section class="act mindset action-act" id="mindset" aria-labelledby="mindset-title">
+      <div class="act-content motion-content story-director ethos-director">
+        <div class="chapter-strip ethos-strip" data-strip><div class="push-lane"><div class="push-rig">
+          <svg class="pixel-pusher" viewBox="0 0 50 64" aria-hidden="true" shape-rendering="crispEdges"><g class="pusher-working" fill="currentColor"><path d="M19 5h10v11H19zM21 16h7v5h-7zM16 21h11v5h4v10h-3v6H15V30h-3v-6h4z"/><path d="M27 22h6v3h7v-6h8v5h-5v7H31v-4h-4zM26 29h6v5h7v-6h8v5h-5v7H29v-5h-3z"/><g class="pusher-leg-back"><path d="M15 37h8v8h-5v6h-6v5H4v-5h5v-7h6z"/></g><g class="pusher-leg-front"><path d="M24 38h8v8h-3v8h7v6H22V49h2z"/></g><path d="M27 9h2v2h-2z" fill="#f7f7f2"/></g><g class="pusher-resting" fill="currentColor"><g class="pusher-breath"><path d="M17 10h11v11H17zM19 21h7v5h-7zM15 26h14v15H15zM13 29h5v9h5v5h-9V37h-4v-5h3zM28 29h5v8h-4v6h-7v-5h6zM16 39h7v11h-5v10H9v-5h4v-9h3zM24 40h7v10h-3v5h6v5H21V49h3z"/><path d="M26 14h2v2h-2z" fill="#f7f7f2"/></g><g class="pusher-sweat" fill="#003580"><path d="M32 5h2v5h-2zM37 9h2v2h-2zM35 1h2v2h-2z"/></g></g></svg>
+          <h2 id="mindset-title">THE WAY WE PLAY</h2></div></div><button class="strip-motion" type="button" data-strip-toggle aria-label="Pause heading animations" aria-pressed="false">Ⅱ</button></div>
+        <div class="action-scene game-scenes ethos-scenes" id="action-scene" data-phase="0" data-state="ready" data-audio="silent" data-layer-stage aria-label="Stories people love, a new era of Indian gaming, and India to the world">
+          <figure class="action-figure scene-street is-current" data-frame="0">
+            <div class="atmosphere-plane" aria-hidden="true"><div class="scene-aurora"><i></i><b></b><em></em></div><div class="halftone-orbit"></div><div class="print-grain"></div><div class="aperture-halo"></div></div>
+            <img class="ethos-type layer-type" src="/assets/feel-v6.webp" alt="" width="1536" height="1024" loading="lazy"><h3 class="sr-only">Feel first.</h3>
+            <img class="ethos-character layer-subject" src="/assets/street-v6.webp" alt="An expressive Indian game heroine in cobalt and red, poised with a sword." width="1254" height="1254" loading="lazy">
+            <figcaption class="ethos-copy"><span>STORIES TO LOVE</span><p>Build stories people love, through games they’ll never forget.</p></figcaption>
+          </figure>
+          <figure class="action-figure scene-cinema" data-frame="1" aria-hidden="true">
+            <div class="atmosphere-plane" aria-hidden="true"><div class="scene-aurora"><i></i><b></b><em></em></div><div class="halftone-orbit"></div><div class="print-grain"></div><div class="aperture-halo"></div></div>
+            <img class="ethos-type layer-type" src="/assets/drive-era-v7.webp" alt="" width="1536" height="1024" loading="lazy"><h3 class="sr-only">Drive a new era.</h3>
+            <img class="ethos-character layer-subject" src="/assets/ambassador-v7.webp" alt="A classic Indian Ambassador racing car flies through the air, a raging driver gripping the wheel." width="1254" height="1254" loading="lazy">
+            <figcaption class="ethos-copy"><span>A NEW ERA</span><p>Drive a new era of Indian gaming. Give gamers a new way to experience storytelling.</p></figcaption>
+          </figure>
+          <figure class="action-figure scene-freedom" data-frame="2" aria-hidden="true">
+            <div class="atmosphere-plane" aria-hidden="true"><div class="scene-aurora"><i></i><b></b><em></em></div><div class="halftone-orbit"></div><div class="print-grain"></div><div class="aperture-halo"></div></div>
+            <img class="ethos-type layer-type" src="/assets/rooted-v6.webp" alt="" width="1536" height="1024" loading="lazy"><h3 class="sr-only">Rooted. Unbound.</h3>
+            <img class="ethos-character layer-subject" src="/assets/freedom-v6.webp" alt="A khaki-clad freedom fighter plants the Indian tricolour, its full flag held high." width="1254" height="1254" loading="lazy">
+            <figcaption class="ethos-copy"><span>INDIA TO THE WORLD</span><p>Indian stories. <br>Nordic game craft. <br>For players everywhere.</p></figcaption>
+          </figure>
+        </div>
+        <div class="sequence-console"><div class="action-steps" role="tablist" aria-label="Explore our ethos"><button id="action-tab-0" type="button" role="tab" aria-selected="true" aria-controls="action-caption" data-action="0"><b>STORIES TO LOVE</b><i></i></button><button id="action-tab-1" type="button" role="tab" aria-selected="false" aria-controls="action-caption" tabindex="-1" data-action="1"><b>A NEW ERA</b><i></i></button><button id="action-tab-2" type="button" role="tab" aria-selected="false" aria-controls="action-caption" tabindex="-1" data-action="2"><b>INDIA TO THE WORLD</b><i></i></button></div><div class="sequence-controls"><button id="sequence-play" type="button" class="ink-button" aria-label="Replay the silent ethos sequence"><span>ONCE MORE</span><svg><use href="#arrow"/></svg></button><button id="sequence-pause" type="button" aria-label="Pause ethos animation" aria-pressed="false">PAUSE</button></div></div>
+        <div id="action-caption" class="action-caption sr-only" role="tabpanel" aria-labelledby="action-tab-0" tabindex="0"><span id="action-caption-text">Build stories people love through games.</span></div>
+        <div class="act-footer"><span>A POINT OF VIEW. A WAY TO PLAY.</span><a href="#hello"><span>MEET THE PEOPLE</span><b>↓</b></a><span class="page-count">03 — 04</span></div>
+      </div>
+    </section>
+
+    <section class="act hello" id="hello" aria-labelledby="hello-title">
+      <div class="act-content hello-content party-content">
+        <div class="chapter-strip people-strip" data-strip><div class="strip-grain" aria-hidden="true"></div><h2 id="hello-title">THE PEOPLE<br><span>BEHIND THE PLAY.</span></h2><button id="hands-replay" class="hands-clasp" type="button" aria-label="Replay the clasped-hands greeting"><span class="grip-half grip-left"><img src="/assets/brotherhood-v7.webp" alt="" width="2172" height="488" loading="lazy"></span><span class="grip-half grip-right"><img src="/assets/brotherhood-v7.webp" alt="" width="2172" height="488" loading="lazy"></span><img class="grip-complete" src="/assets/brotherhood-v7.webp" alt="" width="2172" height="488" loading="lazy"></button><button class="strip-motion" type="button" data-strip-toggle aria-label="Pause heading animations" aria-pressed="false">Ⅱ</button></div>
+        <div class="team-meta"><p>Click a character. Meet their other side.</p><button id="team-pause" type="button" aria-label="Pause team idle animations" aria-pressed="false">Ⅱ PAUSE IDLE</button></div>
+        <div class="team-layout">
+          <div class="party-workspace"><div class="arcade-team party-grid" aria-label="Rana, Prasad, Juha and Jani as interactive arcade characters">
+            <article class="party-member member-rana"><img class="person-portrait" src="/assets/rana-daggubati.webp" alt="Rana Daggubati" width="1100" height="1375" loading="lazy"><div class="person-label"><h3>Rana <span>Daggubati</span></h3><span>STORIES & SCREEN</span></div><button class="party-avatar rana-avatar" type="button" id="rana-smash" aria-label="Rana Daggubati — smash the screen with sound"><span class="team-sprite rana-sprite" aria-hidden="true"></span></button><span class="person-hint">CLICK TO SMASH ↗</span><a class="person-profile" href="https://www.anthillventures.com/mentors/rana-daggubati" target="_blank" rel="noopener noreferrer" aria-label="Rana Daggubati profile, opens in a new tab">↗</a></article>
+            <article class="party-member member-prasad"><img class="person-portrait" src="/assets/prasad-vanga.webp" alt="Prasad Vanga" width="1100" height="1375" loading="lazy"><div class="person-label"><h3>Prasad <span>Vanga</span></h3><span>VENTURES & VISION</span></div><button class="party-avatar prasad-avatar" id="prasad-phone" type="button" aria-label="Prasad Vanga — take out the phone"><span class="team-sprite prasad-sprite" aria-hidden="true"></span></button><span class="person-hint">CLICK TO CALL ↗</span><a class="person-profile" href="https://www.anthillventures.com/team/prasad-vanga" target="_blank" rel="noopener noreferrer" aria-label="Prasad Vanga profile, opens in a new tab">↗</a></article>
+            <article class="party-member member-juha"><img class="person-portrait" src="/assets/juha-portrait-v5.webp" alt="Juha Huhtakallio" width="200" height="200" loading="lazy"><div class="person-label"><h3>Juha <span>Huhtakallio</span></h3><span>GAMES & PUBLISHING</span></div><button class="party-avatar juha-avatar" id="juha-wave" type="button" aria-label="Juha Huhtakallio — wave hello"><span class="team-sprite juha-sprite" aria-hidden="true"></span></button><span class="person-hint">CLICK TO SAY HI ↗</span></article>
+            <article class="party-member member-jani"><img class="person-portrait" src="/assets/jani-portrait-v5.webp" alt="Jani Joenniemi" width="684" height="1024" loading="lazy"><div class="person-label"><h3>Jani <span>Joenniemi</span></h3><span>PRODUCTION & FINANCING</span></div><button class="party-avatar jani-avatar" id="jani-glasses" type="button" aria-label="Jani Joenniemi — adjust glasses"><span class="team-sprite jani-sprite" aria-hidden="true"></span></button><span class="person-hint">CLICK TO ADJUST ↗</span></article>
+          </div><div class="team-scene-footer"><span>SAME TABLE. DIFFERENT SUPERPOWERS.</span><span id="team-action-note" role="status" aria-live="polite">GO ON. SAY HELLO.</span></div></div>
+          <div class="invitation"><span class="paper-pin" aria-hidden="true"></span><span class="marker invite-note">Room for one more.</span><div class="contact-tabs" role="tablist" aria-label="Choose your collaboration interest"><button id="contact-tab-0" type="button" role="tab" aria-selected="true" aria-controls="contact-panel" data-contact="0"><i aria-hidden="true"></i>A STORY<span>↗</span></button><button id="contact-tab-1" type="button" role="tab" aria-selected="false" aria-controls="contact-panel" tabindex="-1" data-contact="1"><i aria-hidden="true"></i>A CRAFT<span>↗</span></button><button id="contact-tab-2" type="button" role="tab" aria-selected="false" aria-controls="contact-panel" tabindex="-1" data-contact="2"><i aria-hidden="true"></i>A PARTNERSHIP<span>↗</span></button></div><div id="contact-panel" role="tabpanel" aria-labelledby="contact-tab-0" tabindex="0"><p id="contact-description">Something on your mind?<br>We’d love to hear it.</p><a class="ink-button contact-cta" id="contact-action" href="mailto:Info@anthillventures.com?subject=A%20story%20for%20Anthill%20Game%20Studios"><span>LET’S TALK</span><svg><use href="#arrow"/></svg></a></div><a class="email" href="mailto:Info@anthillventures.com">Info@anthillventures.com ↗</a><svg class="invite-scribble" viewBox="0 0 290 40" aria-hidden="true"><path d="M4 26c88-29 169-24 282-16M16 34c74-22 145-21 221-17"/></svg></div>
+        </div>
+        <footer class="act-footer"><span>© <span id="year">2026</span> ANTHILL GAME STUDIOS</span><a class="back-top" href="#opening"><span>BACK TO THE GOOD BIT</span><b>↑</b></a><span class="page-count">04 — 04</span></footer>
+      </div>
+    </section>
+  </main>
+  <dialog class="world-dialog" aria-labelledby="world-dialog-title"><div class="world-dialog-grid"><div class="dialog-art"><img id="dialog-image" src="/assets/mass-heroes.webp" alt=""><span>ANTHILL / HOW WE SEE GAMES</span></div><div class="dialog-copy"><button class="dialog-close" type="button" aria-label="Close our point of view"><svg><use href="#cross"/></svg></button><span id="dialog-number" class="micro"></span><h2 id="world-dialog-title"></h2><p id="dialog-description"></p><span class="marker" id="dialog-note"></span><div class="dialog-bottom"><span>THE POSSIBILITIES WE BELIEVE IN.</span><button class="dialog-next" type="button">NEXT PERSPECTIVE<svg><use href="#arrow"/></svg></button></div></div></div></dialog>
+  <canvas class="scribble-canvas" id="scribble-canvas" aria-hidden="true"></canvas>
+  <div class="scribble-tools" role="region" aria-label="Scribble tools" hidden><span class="marker">Make your mark.</span><div role="group" aria-label="Ink colour"><button type="button" class="ink-colour active" data-colour="#66eaff" aria-label="Cyan ink" aria-pressed="true" style="--pen:#66eaff"></button><button type="button" class="ink-colour" data-colour="#f5f2e9" aria-label="White ink" aria-pressed="false" style="--pen:#f5f2e9"></button><button type="button" class="ink-colour" data-colour="#df1c36" aria-label="Red ink" aria-pressed="false" style="--pen:#df1c36"></button></div><button class="clear-ink" type="button">Clear</button><button class="done-ink" type="button">Done ↗</button><small>DRAG TO DRAW · ESC TO FINISH</small></div>
+  <div class="screen-smash" aria-hidden="true"><svg class="screen-fracture" viewBox="0 0 1000 1000" preserveAspectRatio="none"></svg><span class="screen-thud">THUD.</span><span class="smash-flash"></span></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
 </html>

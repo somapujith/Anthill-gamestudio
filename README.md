@@ -1,61 +1,41 @@
-# Anthill Game Studios
+﻿# Anthill Game Studios — V2
 
-A presentation-ready studio introduction built with React, Vite, GSAP and Lenis.
+The supplied `New/Anthill-Gaming-Studios-New/project` website is integrated at the repository root on branch `V2`: Play Beyond opening, aurora background, rotating metal logo, world dialogs, ethos sequence, interactive team characters, collaboration tabs and scribble mode.
 
-## Local development
+## Run
 
 ```sh
 npm install
-npm run dev -- --port 5174
+npm run dev
 ```
 
-## Present the production build
+For a production preview:
 
 ```sh
 npm run build
 npm run present
 ```
 
-Open http://localhost:4174/ and use normal browser zoom. All artwork and fonts are self-hosted, so the built website has no external asset or API dependency. Keep this terminal running during the presentation. Stop with Ctrl+C.
+Open http://localhost:4174/. Vite builds into `dist/`, and the existing Vercel configuration still applies. Artwork, fonts and audio are self-hosted. Only clicking Rana requests the impact sound; there is no background music. Contact links open an email application.
 
-## The experience
+## Edit
 
-The opening uses the supplied Anthill Ventures logo, centered for one second before it moves aside to reveal “GAME STUDIOS” with the supplied React Bits ShinyText effect. GAME STUDIOS stays visible and shining for the remaining intro time. The intro fades between 4.5 and 5 seconds, with a five-second deadline, before the website animations begin. Skip intro and Escape dismiss it immediately; reduced motion bypasses it. The hero image preloads during the intro, waits for decoding, then opens with a continuous curtain wipe and a gentle camera settle.
+- `index.html` owns the active page and ordered stylesheet/script references.
+- `public/` contains the supplied styles, browser scripts and assets. The active runtime is `app.js`, `impact-v8.js`, `studio-v7.js`, `aurora-v8.js`, `strips-v7.js` and `polish-v9.js`.
+- `public/assets/` retains the supplied assets alongside existing provenance records and font license notices.
+- The previous React implementation remains in `src/` for reference and is not mounted by V2. Its five-second intro is superseded by the supplied opening.
 
-1. A film-poster opening built around “Stories worth playing,” with Anton typography and a masked artwork reveal.
-2. A light editorial manifesto connecting Indian cinema, Nordic game craft and worldwide ambition.
-3. A scroll-driven cinematic scene that moves from characters becoming culture to players living the story, followed by the India × the Nordics proposition.
-4. Three animated world explorations, clearly identified as concept art, and an interactive creative workbench exploring story, world and play.
-5. Formal portraits of Rana Daggubati and Prasad Vanga from their official Anthill Ventures profiles.
-6. Invitations for storytellers, creators and industry collaborators, with working email links.
+The original import folder is a local reference, not a build dependency. A clean checkout of `V2` runs without it. Historical styles and scripts from the supplied package are retained; `index.html` determines which ones are active.
 
-Motion includes staggered headline entrances, artwork reveals, parallax, coordinated section entrances, a sticky cinematic transition, magnetic links and animated process changes. The cinematic sequence becomes a readable linear story on phones, on screens shorter than 700px, and when reduced motion is requested. Mobile navigation locks background scrolling and supports keyboard access.
-
-## Source material
-
-The supplied Anthill Game Studios identity provides the illustrative worlds. The user-provided Anthill Ventures logo appears in the header and footer. The supplied studio communication sets the cinema-led narrative. Self-hosted Anton, DM Sans and Space Mono create the active type system. The stylesheet `src/cinematic.css` owns this visual direction over the retained component styles.
-
-Portraits and supported biographies come from Anthill Ventures' official profiles. Prasad's title is explicitly Founder & CEO of Anthill Ventures. Contact options use the organization's published email address. Profile and asset provenance are recorded in public/assets/people-sources.md.
-
-Asset provenance and font licenses are in public/assets/SOURCES.md.
-
-## Verification
-
-Run browser checks through the Playwright CLI:
+## Verify
 
 ```sh
-npx @playwright/cli -s=anthill open http://localhost:4174/
-npx @playwright/cli -s=anthill run-code --filename scripts/redesign-check.cjs
-npx @playwright/cli -s=anthill run-code --filename scripts/viewport-audit.cjs
-npx @playwright/cli -s=anthill run-code --filename scripts/motion-audit.cjs
-npx @playwright/cli -s=anthill run-code --filename scripts/interaction-audit.cjs
-npx @playwright/cli -s=anthill run-code --filename scripts/entry-check.cjs
-npx @playwright/cli -s=anthill run-code --filename scripts/hero-reveal-check.cjs
-npx @playwright/cli -s=anthill run-code --filename scripts/hero-text-check.cjs
+npm run check
+npm run build
+npx @playwright/cli -s=anthill-v2 open http://localhost:4174/ --browser chrome
+npx @playwright/cli -s=anthill-v2 run-code --filename scripts/v2-check.cjs
 ```
 
-The check asserts responsive text and overflow at eleven widths from 320px to 1920px, image and anchor integrity, loaded fonts, reduced motion, mobile content order, keyboard navigation, creative process states and contact choices. It also exercises the normal-motion desktop cinematic sequence at three scroll positions and verifies its text transition and sticky positioning. Screenshots are written under output/playwright/.
+The static check validates anchors, unique IDs, local HTML/CSS references and loaded script syntax. The browser check covers responsive layout, artwork, fonts, world dialogs, keyboard tabs, team actions, animation pause, scribble drawing, reduced motion and the canvas fallback when WebGL is unavailable. Screenshots go into `output/playwright/`. Older browser checks target the previous React site and should be run on `main`.
 
-The viewport audit checks 49 sizes from 320px to 2560px, including both sides of every layout breakpoint and short landscape screens. The motion audit checks every section entrance completes in six portrait, landscape, tablet and desktop configurations, alongside background scroll locking, keyboard focus trapping, reading progress and the correct cinematic layout. The interaction audit checks all craft and contact states with motion enabled at 320px, 768px and 1440px, plus menu anchor navigation and resize cleanup. These checks exercise Chromium's emulated viewports; they do not establish physical-device or cross-browser coverage.
-
-The entry check verifies logo centering, the one-second hold, animated ShinyText, the five-second handoff and sustained GAME STUDIOS display, scrolling restoration, skip controls and reduced motion at four widths. The hero reveal check samples individual animation frames at three widths, including a delayed image response, to catch snapping, opacity flashes and premature reveals. The hero text check samples the intro-to-website handoff to verify the three headline lines reveal without rotation, opacity resets or leftover transforms.
+Browser checks use emulated Chromium viewports; they do not establish physical-device or cross-browser coverage.
