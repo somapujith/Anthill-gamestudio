@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './PixelLogo.css';
 
-const SYMBOL = '/assets/studio-symbol.webp';
+const SYMBOL = '/assets/studio-symbol.svg';
 
 function traceMask(data, width, height) {
   const occupied = (x, y) => x >= 0 && x < width && y >= 0 && y < height && data[(y * width + x) * 4 + 3] >= 128;
@@ -87,7 +87,7 @@ export default function PixelLogo({ paused = false }) {
     const canvas = canvasRef.current;
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
     let disposed = false;
-    let renderer, geometry, sculpture, scene, camera, reflection, grainTexture;
+    let renderer, geometry, sculpture, scene, camera, reflection;
     let Box3, Vector3;
     let materials = [];
     let raf = 0;
@@ -235,23 +235,8 @@ export default function PixelLogo({ paused = false }) {
         const pink = new THREE.DirectionalLight(0xff2bd0, 4); pink.position.set(5, 1, -2); scene.add(pink);
         const green = new THREE.DirectionalLight(0x39ff8a, 3.4); green.position.set(-4, 2, -4); scene.add(green);
         const violet = new THREE.DirectionalLight(0x8a2bff, 3); violet.position.set(0, -4, 5); scene.add(violet);
-        // Film-grain texture: speckled luminance for colour, bump and roughness so the metal reads as sandy and glowing.
-        const grain = document.createElement('canvas');
-        grain.width = grain.height = 256;
-        const grainContext = grain.getContext('2d');
-        if (grainContext) {
-          const noise = grainContext.createImageData(256, 256);
-          for (let i = 0; i < noise.data.length; i += 4) {
-            const value = 55 + Math.random() * 200;
-            noise.data[i] = noise.data[i + 1] = noise.data[i + 2] = value; noise.data[i + 3] = 255;
-          }
-          grainContext.putImageData(noise, 0, 0);
-          grainTexture = new THREE.CanvasTexture(grain);
-          grainTexture.wrapS = grainTexture.wrapT = THREE.RepeatWrapping;
-          grainTexture.repeat.set(7, 7);
-        }
-        const face = new THREE.MeshPhysicalMaterial({ color: 0xf2e8ff, map: grainTexture, bumpMap: grainTexture, bumpScale: 3.2, roughnessMap: grainTexture, roughness: .62, metalness: .35, clearcoat: .5, clearcoatRoughness: .4, envMapIntensity: 1.1, emissive: 0xff2bd0, emissiveMap: grainTexture, emissiveIntensity: .22 });
-        const side = new THREE.MeshPhysicalMaterial({ color: 0x9a6bff, map: grainTexture, bumpMap: grainTexture, bumpScale: 3.2, roughnessMap: grainTexture, roughness: .6, metalness: .7, clearcoat: .4, clearcoatRoughness: .4, envMapIntensity: 1.3, emissive: 0xb23cff, emissiveMap: grainTexture, emissiveIntensity: .3 });
+        const face = new THREE.MeshPhysicalMaterial({ color: 0xf0eee6, roughness: .32, metalness: .18, clearcoat: .35, clearcoatRoughness: .22, envMapIntensity: .55 });
+        const side = new THREE.MeshPhysicalMaterial({ color: 0x827685, roughness: .3, metalness: .65, clearcoat: .3, clearcoatRoughness: .2, envMapIntensity: .8 });
         materials = [face, side];
         const shape = new THREE.Shape(regularize(contours[0], 3.5).map(([x, y]) => new THREE.Vector2((x - mask.width / 2) / 32, (mask.height / 2 - y) / 32)));
         const depth = .68;
@@ -275,7 +260,7 @@ export default function PixelLogo({ paused = false }) {
       canvas.removeEventListener('webglcontextlost', onContextLost);
       canvas.removeEventListener('webglcontextrestored', onContextRestored);
       geometry?.dispose(); materials.forEach(material => material.dispose());
-      grainTexture?.dispose(); reflection?.dispose(); renderer?.dispose();
+      reflection?.dispose(); renderer?.dispose();
     };
   }, []);
 

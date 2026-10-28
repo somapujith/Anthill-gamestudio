@@ -93,7 +93,7 @@ export default function PeopleContact() {
     </section>
 
     <section id="contact" className="pc-contact" aria-labelledby="pc-contact-title">
-      <img className="pc-contact-mark" src="/assets/studio-symbol.webp" alt="" aria-hidden="true" loading="lazy" />
+      <img className="pc-contact-mark" src="/assets/studio-symbol.svg" alt="" aria-hidden="true" loading="lazy" />
       <div className="pc-section-meta pc-reveal"><span>06 / OPEN A NEW CONNECTION</span><ArrowDown size={18} aria-hidden="true" /></div>
       <div className="pc-invitation-intro pc-reveal"><h2 id="pc-contact-title">Next world.<br /><em>Your move.</em></h2><p>Every great world starts with a conversation. Let’s start ours.</p></div>
       <div className="pc-invitation-layout pc-reveal">

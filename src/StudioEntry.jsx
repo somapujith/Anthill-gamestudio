@@ -75,8 +75,8 @@ function StudioIntro({ onComplete }) {
   return <div ref={root} className="studio-intro" aria-label="Anthill Game Studios introduction">
     <div className="intro-ambient" aria-hidden="true" />
     <div className="intro-lockup">
-      <div className="intro-anthill"><img src="/assets/studio-symbol.webp" width="128" height="124" alt="" /></div>
-      <div className="intro-game-studios"><img src="/assets/studio-wordmark.webp" width="340" height="125" alt="Anthill Game Studios" /></div>
+      <div className="intro-anthill"><img src="/assets/studio-symbol.svg" width="128" height="124" alt="" /></div>
+      <div className="intro-game-studios"><img src="/assets/studio-wordmark.svg" width="340" height="125" alt="Anthill Game Studios" /></div>
     </div>
     <p className="intro-tagline">STORIES WORTH PLAYING.</p>
     <button className="intro-skip" type="button" onClick={onComplete}>Skip intro <span aria-hidden="true">↗</span></button>

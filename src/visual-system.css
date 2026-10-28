@@ -25,7 +25,7 @@ html { scroll-padding-top: calc(var(--header-height) + 16px); }
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(14px);
 }
-.site-shell .brand-lockup > img { width: 174px; height: auto; }
+.site-shell .brand-lockup > img { width: 200px; height: auto; }
 .site-shell .desktop-nav { gap: clamp(20px, 2.3vw, 36px); }
 .site-shell .desktop-nav > a { font-size: 13px; gap: 8px; color: #d8dccf; }
 .site-shell .desktop-nav > a > span { color: #a6ac9b; font-size: 11px; }
@@ -103,7 +103,7 @@ html { scroll-padding-top: calc(var(--header-height) + 16px); }
   .site-shell .site-header { padding-inline: 24px; }
   .site-shell .header-invitation { display: none; }
   .site-shell .desktop-nav { display: none; }
-  .site-shell .brand-lockup > img { width: 166px; }
+  .site-shell .brand-lockup > img { width: 186px; }
   .site-shell .conviction-main { grid-template-columns: 1.1fr 1fr; gap: 6%; }
   .site-shell .conviction h2 { font-size: clamp(40px, 6vw, 58px); }
   .site-shell .chapter-aside { display: none; }
@@ -123,7 +123,7 @@ html { scroll-padding-top: calc(var(--header-height) + 16px); }
   .site-shell .footer-bottom { align-items: flex-start; gap: 12px 24px; }
   .site-shell .footer-bottom > span:first-child { width: 100%; }
   .site-shell .footer-bottom .footer-top-link { margin-left: auto; font-size: 12px; }
-  .footer-locations { font-size: 11px; gap: 9px; min-height: 44px; }
+  .footer-locations { font-size: 12px; gap: 9px; min-height: 44px; }
   .footer-locations > i { width: 12px; }
 }
 @media (max-width: 380px) {

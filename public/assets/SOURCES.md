@@ -66,3 +66,11 @@ Source: user-provided `Anthill Ventures Logo.png` (1010 x 240 RGBA). `official-l
 - `anton-OFL.txt`: SIL Open Font License from https://github.com/google/fonts/blob/main/ofl/anton/OFL.txt
 - The active type system uses Anton for film-poster display headings, existing DM Sans for readable body text and Space Mono for supporting labels. Oxanium and Space Grotesk remain archived assets.
 - The scroll-driven cinematic sequence reuses the supplied `mass-heroes.webp` concept art. No new commercial film imagery or generated portraits are introduced.
+
+## Scalable studio identity
+
+- `studio-logo.svg`, `studio-wordmark.svg` and `studio-symbol.svg` contain transparent vector outlines traced from the approved corresponding WebP assets. They preserve the existing pixel artwork and lettering, without substituting a font or inventing a new lockup.
+- The source alpha silhouette is traced at its 50% boundary; collinear segments are combined and holes retain even-odd filling. The SVG files contain paths, with no embedded raster images, filters or external font dependencies.
+- `scripts/prepare-brand-vectors.py` reproduces these assets using Pillow. The website uses the SVG versions for its header, footer, introduction and decorative studio marks. The WebP sources remain available as provenance.
+- The 3D hero samples the same SVG symbol for its stepped outline. Its clean material uses lighting and shallow bevels rather than the previous grain/bump texture.
+- The current storytelling sequence uses supplied `frames.webp` identity artwork; the three world chapters retain their original concept-art assets.

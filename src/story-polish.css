@@ -27,7 +27,7 @@
 .cinema-sequence .craft-pixel-route rect { fill: var(--ink); }
 .cinema-sequence .craft-pixel-route rect:last-child { fill: var(--cream); }
 .cinema-sequence .craft-pixel-route figcaption { display: flex; justify-content: space-between; gap: 14px; margin-top: 11px; font: 12px/1.6 var(--font-mono); }
-.cinema-sequence .craft-pixel-route figcaption > span:nth-child(2) { color: #3d1c13; font-size: 12px; }
+.cinema-sequence .craft-pixel-route figcaption > span:nth-child(2) { color: var(--ink); font-size: 12px; }
 
 .sc-studio .sc-approach { padding-top: 64px; padding-bottom: 64px; }
 .sc-studio .sc-heading-row { margin-block: 34px; grid-template-columns: 1.1fr 1fr; gap: 8%; }

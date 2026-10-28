@@ -55,6 +55,7 @@
 .cv-worlds .cv-mumbai .cv-content { grid-row: 3; display: grid; grid-template-columns: 1.15fr 1fr; align-items: start; gap: 14px 7%; background: var(--cream); color: var(--ink); padding: 30px clamp(24px, 3vw, 48px) 36px; }
 .cv-worlds .cv-mumbai .cv-chapter-label { grid-column: 1 / -1; margin: 0 0 8px; color: #56594d; }
 .cv-worlds .cv-mumbai .cv-content h3 { grid-row: 2 / 4; margin: 0; font-size: clamp(48px, 5vw, 76px); }
+.cv-worlds .cv-mumbai .cv-content h3 em { color: #a72c20; }
 .cv-worlds .cv-mumbai .cv-content > p { grid-column: 2; color: #454a3e; max-width: 440px; }
 .cv-worlds .cv-mumbai .cv-field-notes { grid-column: 2; margin-top: 6px; color: #56594d; }
 .cv-worlds .cv-mumbai .cv-field-notes span:first-child { color: #454a3e; }

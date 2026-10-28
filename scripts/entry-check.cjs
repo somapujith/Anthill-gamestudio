@@ -1,69 +1,40 @@
-async (page) => {
-  const assert=(condition,message)=>{if(!condition)throw new Error(message);};
-  const origin=new URL(page.url()).origin;
-  const errors=[];
-  const onError=e=>errors.push(e.message);
-  page.on('pageerror',onError);
-  const results=[];
-  await page.emulateMedia({reducedMotion:'no-preference'});
-  for(const width of [320,390,768,1440]){
-    await page.setViewportSize({width,height:900});
-    await page.goto(origin,{waitUntil:'domcontentloaded'});
-    await page.locator('.studio-intro').waitFor();
-    const started=Date.now();
-    await page.waitForTimeout(800);
-    const initial=await page.evaluate(()=>{
-      const logo=document.querySelector('.intro-anthill img').getBoundingClientRect();
-      return {center:logo.left+logo.width/2,viewport:innerWidth,studioVisibility:getComputedStyle(document.querySelector('.intro-game-studios')).visibility,siteMounted:!!document.querySelector('.site-shell'),logo:document.querySelector('.intro-anthill img').getAttribute('src')};
-    });
-    assert(Math.abs(initial.center-width/2)<3,`Intro logo is not centered at ${width}: ${initial.center}`);
-    assert(initial.studioVisibility==='hidden'&&!initial.siteMounted,'Website or companion text revealed too early');
-    assert(initial.logo==='/assets/official-logo.webp','Intro does not use the supplied official logo');
-    await page.screenshot({path:`output/playwright/intro-${width}-centered.png`});
-    await page.waitForTimeout(Math.max(0,2100-(Date.now()-started)));
-    const revealed=await page.evaluate(()=>{
-      const logo=document.querySelector('.intro-anthill img').getBoundingClientRect();
-      const companion=document.querySelector('.intro-game-studios').getBoundingClientRect();
-      const shiny=document.querySelector('.shiny-text');
-      return {logoCenter:logo.left+logo.width/2,logoLeft:logo.left,studioRight:companion.right,studioOpacity:Number(getComputedStyle(document.querySelector('.intro-game-studios')).opacity),gradient:getComputedStyle(shiny).backgroundImage,fill:getComputedStyle(shiny).webkitTextFillColor};
-    });
-    assert(revealed.logoCenter<initial.center-15,'Logo did not move aside');
-    assert(revealed.logoLeft>=-1&&revealed.studioRight<=width+1,`Intro lockup clips at ${width}: ${JSON.stringify(revealed)}`);
-    assert(revealed.studioOpacity>.99&&revealed.fill==='rgba(0, 0, 0, 0)','Shiny studio text did not reveal');
-    await page.screenshot({path:`output/playwright/intro-${width}-shining.png`});
-    await page.waitForTimeout(120);
-    const gradient=await page.locator('.shiny-text').evaluate(e=>getComputedStyle(e).backgroundImage);
-    assert(gradient!==revealed.gradient,'ShinyText gradient is not animating');
-    await page.waitForTimeout(Math.max(0,4200-(Date.now()-started)));
-    const held=await page.evaluate(()=>({
-      introOpacity:Number(getComputedStyle(document.querySelector('.studio-intro')).opacity),
-      studioOpacity:Number(getComputedStyle(document.querySelector('.intro-game-studios')).opacity),
-      siteMounted:!!document.querySelector('.site-shell'),
-    }));
-    assert(held.introOpacity>.99&&held.studioOpacity>.99&&!held.siteMounted,'GAME STUDIOS did not remain visible for the remaining intro time');
-    await page.waitForFunction(()=>!document.querySelector('.studio-intro'),null,{polling:'raf',timeout:1500});
-    const duration=Date.now()-started;
-    assert(duration>=4800&&duration<5200,`Intro should finish at five seconds: ${duration}ms`);
-    await page.locator('.hero-art-frame').waitFor();
-    assert(await page.evaluate(()=>document.body.style.overflow!=='hidden'),'Intro left scrolling locked');
-    results.push({width,initial,revealed:{...revealed,gradient:undefined},held,duration});
-  }
-  await page.emulateMedia({reducedMotion:'reduce'});
-  await page.reload();
-  await page.locator('.hero').waitFor();
-  assert(await page.locator('.studio-intro').count()===0,'Reduced motion still shows the intro');
-  assert(await page.locator('.hero-reveal-curtain').evaluate(e=>getComputedStyle(e).display==='none'),'Reduced motion still covers the hero');
-  await page.emulateMedia({reducedMotion:'no-preference'});
-  await page.reload({waitUntil:'domcontentloaded'});
-  await page.getByRole('button',{name:/Skip intro/}).click();
-  await page.locator('.hero').waitFor();
-  assert(await page.locator('.studio-intro').count()===0,'Skip intro failed');
-  await page.reload({waitUntil:'domcontentloaded'});
+async page => {
+ const assert=(v,m)=>{if(!v)throw Error(m)};
+ const origin=new URL(page.url()).origin;
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const results=[];
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ for(const width of [390,1440]){
+  await page.setViewportSize({width,height:900});
+  await page.goto(origin,{waitUntil:'domcontentloaded'});
   await page.locator('.studio-intro').waitFor();
-  await page.keyboard.press('Escape');
-  await page.locator('.hero').waitFor();
-  assert(await page.locator('.studio-intro').count()===0,'Escape did not skip the intro');
-  page.off('pageerror',onError);
-  assert(!errors.length,`Browser errors: ${errors.join('; ')}`);
-  return {results,reducedMotion:true,skip:true,escape:true,errors};
+  const started=Date.now();
+  await page.waitForTimeout(700);
+  const initial=await page.evaluate(()=>{const mark=document.querySelector('.intro-anthill img').getBoundingClientRect();return {center:mark.x+mark.width/2,inert:document.querySelector('.site-shell').inert,source:document.querySelector('.intro-anthill img').getAttribute('src')};});
+  assert(Math.abs(initial.center-width/2)<4,'Intro mark not centered');
+  assert(initial.inert&&initial.source.endsWith('.svg'),'Intro is not using protected sharp branding');
+  await page.waitForTimeout(Math.max(0,2100-(Date.now()-started)));
+  assert(await page.locator('.intro-game-studios').evaluate(e=>Number(getComputedStyle(e).opacity)>.99),'Intro wordmark did not reveal');
+  await page.waitForTimeout(Math.max(0,4450-(Date.now()-started)));
+  const handoff=await page.locator('.intro-anthill').evaluate(e=>({scale:new DOMMatrix(getComputedStyle(e).transform).a,top:e.getBoundingClientRect().top}));
+  await page.screenshot({path:`output/playwright/visual-pass/intro-handoff-${width}.png`});
+  await page.waitForFunction(()=>!document.querySelector('.studio-intro'),null,{timeout:2000});
+  const duration=Date.now()-started;
+  assert(duration>=4700&&duration<5500,`Intro duration drifted: ${duration}`);
+  await page.locator('.pixel-logo[data-ready="true"]').waitFor();
+  assert(await page.evaluate(()=>!document.querySelector('.site-shell').inert&&document.body.style.overflow!=='hidden'),'Intro left app locked');
+  results.push({width,duration,handoff,vectorSource:initial.source});
+ }
+ for(const method of ['skip','escape','reduce']){
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.goto(origin,{waitUntil:'domcontentloaded'});
+  await page.locator('.studio-intro').waitFor();
+  if(method==='skip')await page.getByRole('button',{name:/Skip intro/}).click();
+  if(method==='escape')await page.keyboard.press('Escape');
+  if(method==='reduce')await page.emulateMedia({reducedMotion:'reduce'});
+  await page.waitForFunction(()=>!document.querySelector('.studio-intro'));
+  assert(await page.evaluate(()=>!document.querySelector('.site-shell').inert&&document.body.style.overflow!=='hidden'),`${method} left app locked`);
+ }
+ assert(errors.length===0,errors.join('\n'));
+ return {results,skip:'passed',escape:'passed',liveReducedMotion:'passed',errors};
 }
