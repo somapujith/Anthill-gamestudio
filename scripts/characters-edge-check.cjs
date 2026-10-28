@@ -1,6 +1,7 @@
 async page => {
   const assert=(v,m)=>{if(!v)throw new Error(m)};
   const origin=new URL(page.url()).origin;
+  const people=[['rana','Rana Daggubati','power'],['prasad','Prasad Vanga','call'],['juha','Juha Huhtakallio','wave'],['jani','Jani Joenniemi','adjust'],['shobu','Shobu Yarlagadda','walk']];
   const errors=[];
   page.on('pageerror',error=>errors.push(error.message));
   await page.emulateMedia({reducedMotion:'no-preference'});
@@ -11,9 +12,13 @@ async page => {
   const rana=page.getByRole('button',{name:'Interact with Rana Daggubati',exact:true});
   await rana.scrollIntoViewIfNeeded();
   await page.waitForTimeout(1000);
-  await rana.click();await rana.click();
+  await rana.click();
+  const strikeActivation=await page.locator('.ic-stage[data-character="rana"]').getAttribute('data-activations');
+  await rana.click();
+  assert(await page.locator('.ic-stage[data-character="rana"]').getAttribute('data-action')==='power','Rana must always strike');
+  assert(await page.locator('.ic-stage[data-character="rana"]').getAttribute('data-activations')===strikeActivation,'Active Rana strike was restarted');
   await page.waitForTimeout(200);
-  await page.locator('.pc-person-1 .pc-portrait').screenshot({path:'output/playwright/character-rana-thumbs-up.png'});
+  await page.locator('.pc-person-1 .pc-portrait').screenshot({path:'output/playwright/character-rana-strike.png'});
   const prasad=page.getByRole('button',{name:'Interact with Prasad Vanga',exact:true});
   await prasad.click();await prasad.click();
   await page.waitForTimeout(200);
@@ -29,21 +34,25 @@ async page => {
   const failed=await page.context().newPage();
   failed.on('pageerror',error=>errors.push(error.message));
   await failed.emulateMedia({reducedMotion:'reduce'});
-  await failed.route('**/*-atlas-v6.webp',route=>route.abort());
+  await failed.route('**/assets/*atlas*.webp',route=>route.abort());
   await failed.goto(origin,{waitUntil:'networkidle'});
-  await failed.locator('.ic-stage[data-ready="error"]').nth(3).waitFor();
-  for(const name of ['Rana Daggubati','Prasad Vanga','Juha Huhtakallio','Jani Joenniemi']){
+  await failed.locator('.ic-stage[data-ready="error"]').nth(4).waitFor();
+  for(const [key,name,primaryAction] of people){
     const button=failed.getByRole('button',{name:`Interact with ${name}`,exact:true});
     await button.scrollIntoViewIfNeeded();
     const photo=button.locator('.ic-fallback');
     await photo.waitFor();
     await photo.evaluate(e=>e.decode());
     assert(await photo.evaluate(e=>e.naturalWidth>0&&getComputedStyle(e).opacity==='1'),'Missing atlas does not retain portrait');
-    await button.click();await button.click();
+    await button.click();
+    assert(await failed.locator(`.ic-stage[data-character="${key}"]`).getAttribute('data-action')===primaryAction,`${name} fallback gesture did not respond`);
+    await button.press('Enter');
+    const expected=key==='rana'?'power':key==='shobu'?'walk':'approve';
+    assert(await failed.locator(`.ic-stage[data-character="${key}"]`).getAttribute('data-action')===expected,`${name} fallback keyboard gesture failed`);
     assert(await button.locator('.ic-reaction').isVisible(),'Fallback reaction not usable');
   }
   await failed.screenshot({path:'output/playwright/character-atlas-fallback.png'});
   await failed.close();
   assert(errors.length===0,errors.join('\n'));
-  return {offscreen:'frames frozen',missingAtlas:'portraits and click feedback preserved',approval:'thumbs-up reactions captured',errors};
+  return {offscreen:'frames frozen',missingAtlas:'portraits and click feedback preserved',gestures:'Rana guarded strike, approval reactions and Shobu walking',errors};
 }

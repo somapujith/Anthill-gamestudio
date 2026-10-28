@@ -13,6 +13,7 @@ const people = [
   { character: 'prasad', name: 'Prasad Vanga', firstName: 'Prasad', lastName: 'Vanga', discipline: 'VISION × VENTURE BUILDING', role: 'Founder & CEO, Anthill Ventures', image: '/assets/prasad-vanga.webp', description: 'The founder of Anthill Ventures, bringing global strategy and venture-building experience. A builder’s perspective on connecting ambitious ideas, creative people and lasting businesses.', source: 'https://www.anthillventures.com/team/prasad-vanga' },
   { character: 'juha', name: 'Juha Huhtakallio', firstName: 'Juha', lastName: 'Huhtakallio', discipline: 'GAMES × PUBLISHING', role: 'Games & publishing', image: '/assets/juha-portrait-v5.webp' },
   { character: 'jani', name: 'Jani Joenniemi', firstName: 'Jani', lastName: 'Joenniemi', discipline: 'PRODUCTION × FINANCING', role: 'Production & financing', image: '/assets/jani-portrait-v5.webp' },
+  { character: 'shobu', name: 'Shobu Yarlagadda', firstName: 'Shobu', lastName: 'Yarlagadda', discipline: 'PRODUCTION × STORYTELLING', role: 'Producer & co-founder, Arka Mediaworks', image: '/assets/shobu-yarlagadda.webp', description: 'Producer and co-founder of Arka Mediaworks, bringing experience in building Indian story franchises across film, animation and digital platforms.', source: 'https://www.arkamediaworks.com/about-us', sourceLabel: 'Arka Mediaworks' },
 ];
 
 const invitations = [
@@ -71,7 +72,7 @@ export default function PeopleContact() {
       </div>
       <div className="pc-people-grid">
         <div className="pc-connection" aria-hidden="true"><span className="pc-connection-track" /><span>STORY INSTINCT</span><Plus size={18} /><span>BUILDER MINDSET</span></div>
-        {people.map((person, index) => <article key={person.name} className={`pc-person pc-person-${index + 1}`} aria-labelledby={`${uniqueId}-person-${person.character}`}>
+        {people.map((person, index) => <article key={person.name} className={`pc-person pc-person-${index + 1} pc-person-${person.character}`} aria-labelledby={`${uniqueId}-person-${person.character}`}>
           <div className="pc-portrait pc-reveal">
             <InteractiveCharacter character={person.character} name={person.name} fallbackImage={person.image} paused={charactersPaused} />
           </div>
@@ -83,7 +84,7 @@ export default function PeopleContact() {
               <summary>About {person.firstName}<Plus size={15} aria-hidden="true" /></summary>
               <div className="pc-person-detail-content">
                 <p className="pc-person-description">{person.description}</p>
-                {person.source && <a className="pc-person-contact" href={person.source} target="_blank" rel="noopener noreferrer" aria-label={`Read more about ${person.name} on Anthill Ventures (opens in a new tab)`}>More about {person.firstName}<ArrowUpRight size={18} aria-hidden="true" /></a>}
+                {person.source && <a className="pc-person-contact" href={person.source} target="_blank" rel="noopener noreferrer" aria-label={`Read more about ${person.name} on ${person.sourceLabel || 'Anthill Ventures'} (opens in a new tab)`}>More about {person.firstName}<ArrowUpRight size={18} aria-hidden="true" /></a>}
               </div>
             </details>}
           </div>

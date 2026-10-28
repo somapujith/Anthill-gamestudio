@@ -1,0 +1,64 @@
+.glass-break-effect {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.glass-break-effect[data-state='broken'] {
+  visibility: visible;
+}
+
+.glass-break-fracture {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  fill: none;
+  stroke: #dfe6f0;
+  stroke-width: 1.25;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+  filter: drop-shadow(1px 1px 0 #10110fa6);
+  pointer-events: none;
+}
+
+.glass-break-rays path, .glass-break-impact { vector-effect: non-scaling-stroke; }
+.glass-break-fracture .glass-break-fine { stroke: #f34431b3; stroke-width: .65; }
+.glass-break-effect[data-motion='full'] .glass-break-fracture { animation: glass-break-heal 2500ms ease-out both, glass-break-impact 200ms ease-out both; }
+.glass-break-impact {
+  stroke: #f0eee6;
+  stroke-width: 1;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: glass-break-ring 280ms ease-out both;
+}
+
+.glass-break-effect[data-motion='reduced'] .glass-break-fracture { animation: glass-break-heal 800ms ease-out both; transform: none; }
+.glass-break-effect[data-motion='reduced'] .glass-break-impact { display: none; }
+
+@keyframes glass-break-heal {
+  0%, 60% { opacity: .88; }
+  100% { opacity: 0; }
+}
+@keyframes glass-break-impact {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  55% { transform: translate(1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes glass-break-ring {
+  0% { opacity: .45; transform: scale(.8); }
+  100% { opacity: 0; transform: scale(1.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-break-effect .glass-break-fracture { animation: glass-break-heal 800ms ease-out both !important; transform: none !important; }
+  .glass-break-effect .glass-break-impact { display: none; }
+}

@@ -9,6 +9,7 @@ import PeopleContact from './PeopleContact.jsx';
 import MotionEffects from './MotionEffects.jsx';
 import CinemaSequence from './CinemaSequence.jsx';
 import HeroScene from './HeroScene.jsx';
+import GlassBreakEffect from './GlassBreakEffect.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 const navigation = [
@@ -114,5 +115,6 @@ export default function App({ introActive = false }) {
       <div className="footer-bottom"><span>© {new Date().getFullYear()} ANTHILL GAME STUDIOS</span><span className="footer-locations">HELSINKI <i aria-hidden="true" /> HYDERABAD</span><a href="#top" className="footer-top-link">Back to the beginning <ArrowUpRight size={18} aria-hidden="true" /></a></div>
     </footer>
     <MotionEffects />
+    <GlassBreakEffect />
   </div>;
 }

@@ -9,14 +9,14 @@ async page => {
     await page.setViewportSize({width,height});
     await page.goto(origin,{waitUntil:'networkidle'});
     await page.locator('.pixel-logo[data-ready="true"]').waitFor();
-    await page.locator('.ic-stage[data-ready="ready"]').nth(3).waitFor();
+    await page.locator('.ic-stage[data-ready="ready"]').nth(4).waitFor();
     const layout=await page.evaluate(()=>{
       const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
       return {width:innerWidth,height:innerHeight,pageHeight:document.documentElement.scrollHeight,overflow:document.documentElement.scrollWidth>innerWidth+1,hero:box('.hero'),logo:box('.hero-scene-sculpture'),header:box('.site-header'),peopleHeight:box('#people').height,names:[...document.querySelectorAll('.pc-person-copy h3')].map(e=>({text:e.innerText,clipped:e.scrollWidth>e.clientWidth+1})),removed:/click\s*\/\s*tap to interact|click a character/i.test(document.body.innerText)};
     });
     assert(!layout.overflow,`Overflow ${width}x${height}`);
     assert(!layout.removed,'Removed interaction prompts returned');
-    assert(layout.names.length===4&&layout.names.every(n=>!n.clipped),`Character names clip at ${width}`);
+    assert(layout.names.length===5&&layout.names.every(n=>!n.clipped),`Character names clip at ${width}`);
     if([360,390].includes(width)&&height===844)assert(layout.logo.bottom<=height+1,`Full mobile logo below fold: ${JSON.stringify(layout)}`);
     if(width===1440)assert(layout.peopleHeight<1800,`People section remains too tall: ${layout.peopleHeight}`);
     await page.locator('#people').evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));
@@ -34,11 +34,18 @@ async page => {
   await peopleNav.click();
   const peopleTop=await page.locator('#people').evaluate(e=>e.getBoundingClientRect().top);
   assert(peopleTop>=75&&peopleTop<=150,`People anchor under sticky header or too far below: ${peopleTop}`);
-  await page.getByText('About Rana',{exact:true}).click();
-  assert(await page.locator('.pc-person-details').first().getAttribute('open')!==null,'Biography did not expand');
-  assert(await page.getByRole('link',{name:/Read more about Rana/}).isVisible(),'Sourced profile hidden after expand');
-  await page.getByText('About Rana',{exact:true}).press('Enter');
-  assert(await page.locator('.pc-person-details').first().getAttribute('open')===null,'Biography did not collapse with Enter');
+  assert(await page.locator('.pc-person-contact').count()===3,'Expected three sourced profile links');
+  for(const [firstName,sourceLabel] of [['Rana','Anthill Ventures'],['Prasad','Anthill Ventures'],['Shobu','Arka Mediaworks']]){
+    const summary=page.getByText(`About ${firstName}`,{exact:true});
+    const details=summary.locator('..');
+    await summary.click();
+    assert(await details.getAttribute('open')!==null,`${firstName} biography did not expand`);
+    const link=details.getByRole('link',{name:new RegExp(`Read more about ${firstName}.*on ${sourceLabel}`)});
+    assert(await link.isVisible(),`${firstName} sourced profile hidden after expand`);
+    if(firstName==='Shobu')assert(await link.getAttribute('href')==='https://www.arkamediaworks.com/about-us','Shobu profile has the wrong destination');
+    await summary.press('Enter');
+    assert(await details.getAttribute('open')===null,`${firstName} biography did not collapse with Enter`);
+  }
   const visuals=[];
   for(let i=0;i<3;i++){
     await page.locator('.sc-stage-navigation button').nth(i).click();

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Glasses, Hand, Phone, ThumbsUp, Zap } from 'lucide-react';
+import { Footprints, Glasses, Hand, Phone, ThumbsUp, Zap } from 'lucide-react';
 import './interactive-character.css';
+import './shobu-character.css';
 
 const CHARACTERS = {
   rana: {
@@ -45,8 +46,18 @@ const CHARACTERS = {
     message: 'In focus!',
     approvalMessage: "Let's build!",
   },
+  shobu: {
+    atlas: '/assets/shobu-atlas.webp',
+    idle: [[0, 1800], [1, 450], [0, 1400], [6, 800], [7, 650], [0, 1800]],
+    action: [...Array.from({ length: 4 }, () => [[2, 150], [3, 150], [4, 150], [5, 150]]).flat(), [0, 160]],
+    approval: [[0, 1180]],
+    still: 0,
+    actionName: 'walk',
+    message: 'On the move!',
+    approvalMessage: "Let's build!",
+  },
 };
-const ACTION_ICONS = { rana: Zap, prasad: Phone, juha: Hand, jani: Glasses };
+const ACTION_ICONS = { rana: Zap, prasad: Phone, juha: Hand, jani: Glasses, shobu: Footprints };
 
 const durationOf = sequence => sequence.reduce((total, [, duration]) => total + duration, 0);
 function sampleFrame(sequence, elapsed) {
@@ -95,6 +106,11 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
     const showFrame = next => {
       if (currentFrame !== next) { currentFrame = next; setFrame(next); }
     };
+    const showTravel = elapsed => {
+      if (character !== 'shobu' || !root.current) return;
+      const travel = reducedNow || phase !== 'walk' ? 0 : Math.min(root.current.clientWidth * .1, 30) * Math.min(elapsed / 2400, 1);
+      root.current.style.setProperty('--ic-walk-x', `${travel.toFixed(2)}px`);
+    };
     const advance = () => {
       const now = performance.now();
       if (previous) {
@@ -121,11 +137,13 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
           actionElapsed = 0;
           setAction('idle');
           showFrame(0);
+          showTravel(0);
         } else {
           const sample = reducedNow
             ? { frame: phase === 'approve' ? (config.approvalStill ?? 0) : config.still, remaining: duration - actionElapsed }
             : sampleFrame(sequence, actionElapsed);
           showFrame(sample.frame);
+          showTravel(actionElapsed);
           timer = setTimeout(tick, Math.max(16, Math.ceil(sample.remaining)));
           return;
         }
@@ -137,10 +155,10 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
     };
     const wake = () => { stop(); tick(); };
     const activate = () => {
-      if (disposed) return;
+      if (disposed || document.hidden || (character === 'rana' && phase !== 'idle')) return;
       suspend();
       activations++;
-      const approve = activations % 2 === 0;
+      const approve = character !== 'rana' && character !== 'shobu' && activations % 2 === 0;
       phase = approve ? 'approve' : config.actionName;
       sequence = approve ? config.approval : config.action;
       actionElapsed = 0;
@@ -148,6 +166,17 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
       setAction(phase);
       setStatus(`${name}: ${approve ? config.approvalMessage : config.message}`);
       showFrame(reducedNow ? (approve ? (config.approvalStill ?? 0) : config.still) : sequence[0][0]);
+      showTravel(0);
+      if (character === 'rana') {
+        const rect = root.current?.getBoundingClientRect();
+        if (rect) document.dispatchEvent(new CustomEvent('anthill:character-action', {
+          detail: {
+            character: 'rana', action: 'power', activation: activations,
+            rect: { left: rect.left, top: rect.top, width: rect.width, height: rect.height },
+            reducedMotion: reducedNow,
+          },
+        }));
+      }
       tick();
     };
     engine.current = {
@@ -204,8 +233,9 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
       document.removeEventListener('visibilitychange', onVisibility);
       image.onload = null;
       image.onerror = null;
+      root.current?.style.removeProperty('--ic-walk-x');
     };
-  }, [config, name]);
+  }, [character, config, name]);
 
   useEffect(() => { engine.current?.setPaused(paused); }, [paused]);
 
@@ -213,12 +243,12 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
   const ReactionIcon = approve ? ThumbsUp : ACTION_ICONS[character] || Zap;
   const message = approve ? config.approvalMessage : config.message;
 
-  return <div ref={root} className={`ic-stage${action !== 'idle' ? ' is-active' : ''}`} data-character={character} data-action={action} data-ready={ready} data-activations={activation} data-motion={reduced ? 'reduced' : paused || !inView || !pageVisible ? 'paused' : 'playing'}>
+  return <div ref={root} className={`ic-stage${action !== 'idle' ? ' is-active' : ''}`} data-character={character} data-action={action} data-ready={ready} data-activations={activation} data-visible={inView && pageVisible} data-motion={reduced ? 'reduced' : paused || !inView || !pageVisible ? 'paused' : 'playing'}>
     <span className="ic-aura" aria-hidden="true" />
     <span className="ic-floor" aria-hidden="true" />
     <button className="ic-button" type="button" aria-label={`Interact with ${name}`} aria-busy={action !== 'idle'} onClick={() => engine.current?.activate()}>
       <span className="ic-sprite" aria-hidden="true" data-frame={frame} style={{ backgroundImage: `url('${config.atlas}')`, backgroundPosition: `${(frame % 4) * 100 / 3}% ${frame < 4 ? 0 : 100}%` }} />
-      {ready === 'error' && <img className="ic-fallback" src={fallbackImage} alt="" loading="lazy" width="1100" height="1375" />}
+      {ready === 'error' && fallbackImage && <img className="ic-fallback" src={fallbackImage} alt="" loading="lazy" width="1100" height="1375" />}
       <span key={`impact-${activation}`} className="ic-impact" aria-hidden="true" />
       <span key={`particles-${activation}`} className="ic-particles" aria-hidden="true" />
       <span key={`reaction-${activation}`} className="ic-reaction" aria-hidden="true"><ReactionIcon size={20} strokeWidth={2} /><span>{message}</span></span>
