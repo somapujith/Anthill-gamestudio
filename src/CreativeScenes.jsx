@@ -11,8 +11,8 @@ const directions = [
     number: '01',
     name: 'Larger than life',
     title: <>Mass heroes.<br /><em data-text="Pixel legends.">Pixel legends.</em></>,
-    description: 'The swagger of Indian cinema, reimagined as a bold new world. Big personalities, unmistakable attitude and a visual language that crosses borders.',
-    notes: ['Cinema & character', 'Bollywood-inspired'],
+    description: 'The swagger of Indian content, reimagined as a bold new world. Big personalities, unmistakable attitude and a visual language that crosses borders.',
+    notes: ['Indian content & character', 'Bollywood-inspired'],
     image: 'mass-heroes.webp',
     alt: 'A larger-than-life Indian action hero in a red jacket and gold sunglasses, rendered in sculptural pixels.',
     className: 'cv-mass',
@@ -82,7 +82,7 @@ export default function CreativeScenes() {
         <div className="cv-intro-grid">
           <h2 id="cv-heading">Familiar soul.<br /><em>Uncharted worlds.</em></h2>
           <div className="cv-intro-copy">
-            <p>The swagger. The spectacle. The stories that become part of us. A glimpse of how Indian cinema can open up entirely new worlds of play.</p>
+            <p>The swagger. The spectacle. The stories that become part of us. A glimpse of how Indian content can open up entirely new worlds of play.</p>
             <span className="cv-concept-note">World explorations / Concept art</span>
           </div>
         </div>

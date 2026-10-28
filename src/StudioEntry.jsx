@@ -59,7 +59,6 @@ function StudioIntro({ onComplete }) {
   }, [onComplete]);
 
   return <div ref={root} className="studio-intro" aria-label="Anthill Game Studios introduction">
-    <img className="intro-preload" src="/assets/mumbai.webp" alt="" aria-hidden="true" fetchPriority="high" />
     <div className="intro-ambient" aria-hidden="true" />
     <div className="intro-lockup">
       <div className="intro-anthill"><img src="/assets/studio-symbol.webp" width="128" height="124" alt="" /></div>

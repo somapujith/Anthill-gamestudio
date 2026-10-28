@@ -33,9 +33,9 @@ export default function CinemaSequence() {
   return <section className="cinema-sequence" ref={root} aria-label="The power of Indian storytelling">
     <div className="cinema-scroll-track"><div className="cinema-sticky">
       <div className="cinema-backdrop" aria-hidden="true"><img src="/assets/mass-heroes.webp" alt="" loading="lazy" /></div>
-      <div className="cinema-meta"><span>THE MOST POWERFUL NARRATIVE ENGINE ON EARTH.</span><span>INDIAN CINEMA / REIMAGINED</span></div>
+      <div className="cinema-meta"><span>THE MOST POWERFUL NARRATIVE ENGINE ON EARTH.</span><span>INDIAN CONTENT / REIMAGINED</span></div>
       <div className="cinema-statements">
-        <div className="cinema-statement cinema-first"><span className="eyebrow">IT STARTS WITH A FEELING.</span><h2>CHARACTERS<br />THAT BECOME<br /><em>CULTURE.</em></h2><p>Indian cinema moves hundreds of millions.<br />We hold the insight and the network to that source.</p></div>
+        <div className="cinema-statement cinema-first"><span className="eyebrow">IT STARTS WITH A FEELING.</span><h2>CHARACTERS<br />THAT BECOME<br /><em>CULTURE.</em></h2><p>Indian content moves hundreds of millions.<br />We hold the insight and the network to that source.</p></div>
         <div className="cinema-statement cinema-second"><span className="eyebrow">THE NEXT CHAPTER IS PLAYABLE.</span><h2>STEP INSIDE<br />THE STORY.<br /><em>LIVE THE WORLD.</em></h2><p>We bring the emotion off the screen.<br />And put you at the heart of the story.</p></div>
       </div>
       <div className="cinema-progress" aria-hidden="true"><span /></div>

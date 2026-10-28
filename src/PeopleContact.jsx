@@ -1,14 +1,17 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowDown, ArrowUpRight, Plus } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Pause, Play, Plus } from 'lucide-react';
 import './people-contact.css';
+import InteractiveCharacter from './InteractiveCharacter.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const people = [
-  { name: 'Rana Daggubati', firstName: 'Rana', lastName: 'Daggubati', discipline: 'CINEMA × STORYTELLING', role: 'Actor, producer & entrepreneur', image: '/assets/rana-daggubati.webp', description: 'An actor, producer and entrepreneur working across Indian cinema. A perspective shaped by unforgettable characters, visual storytelling and the possibilities of entertainment.', source: 'https://www.anthillventures.com/mentors/rana-daggubati' },
-  { name: 'Prasad Vanga', firstName: 'Prasad', lastName: 'Vanga', discipline: 'VISION × VENTURE BUILDING', role: 'Founder & CEO, Anthill Ventures', image: '/assets/prasad-vanga.webp', description: 'The founder of Anthill Ventures, bringing global strategy and venture-building experience. A builder’s perspective on connecting ambitious ideas, creative people and lasting businesses.', source: 'https://www.anthillventures.com/team/prasad-vanga' },
+  { character: 'rana', name: 'Rana Daggubati', firstName: 'Rana', lastName: 'Daggubati', discipline: 'INDIAN CONTENT × STORYTELLING', role: 'Actor, producer & entrepreneur', image: '/assets/rana-daggubati.webp', description: 'An actor, producer and entrepreneur working across Indian content. A perspective shaped by unforgettable characters, visual storytelling and the possibilities of entertainment.', source: 'https://www.anthillventures.com/mentors/rana-daggubati' },
+  { character: 'prasad', name: 'Prasad Vanga', firstName: 'Prasad', lastName: 'Vanga', discipline: 'VISION × VENTURE BUILDING', role: 'Founder & CEO, Anthill Ventures', image: '/assets/prasad-vanga.webp', description: 'The founder of Anthill Ventures, bringing global strategy and venture-building experience. A builder’s perspective on connecting ambitious ideas, creative people and lasting businesses.', source: 'https://www.anthillventures.com/team/prasad-vanga' },
+  { character: 'juha', name: 'Juha Huhtakallio', firstName: 'Juha', lastName: 'Huhtakallio', discipline: 'GAMES × PUBLISHING', role: 'Games & publishing', image: '/assets/juha-portrait-v5.webp' },
+  { character: 'jani', name: 'Jani Joenniemi', firstName: 'Jani', lastName: 'Joenniemi', discipline: 'PRODUCTION × FINANCING', role: 'Production & financing', image: '/assets/jani-portrait-v5.webp' },
 ];
 
 const invitations = [
@@ -22,6 +25,7 @@ export default function PeopleContact() {
   const detail = useRef(null);
   const tabRefs = useRef([]);
   const [selected, setSelected] = useState(0);
+  const [charactersPaused, setCharactersPaused] = useState(false);
   const uniqueId = useId().replace(/:/g, '');
   const invitation = invitations[selected];
 
@@ -31,9 +35,6 @@ export default function PeopleContact() {
       const context = gsap.context(() => {
         gsap.utils.toArray('.pc-reveal').forEach(element => {
           gsap.from(element, { y: 36, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 94%', once: true } });
-        });
-        gsap.utils.toArray('.pc-portrait img').forEach(element => {
-          gsap.fromTo(element, { yPercent: -2, scale: 1.04 }, { yPercent: 2, scale: 1.04, ease: 'none', scrollTrigger: { trigger: element.parentNode, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
         });
         gsap.from('.pc-connection-track', { scaleX: 0, transformOrigin: 'left', duration: 1.6, ease: 'power3.inOut', scrollTrigger: { trigger: '.pc-people-grid', start: 'top 85%', once: true } });
       }, root);
@@ -65,24 +66,23 @@ export default function PeopleContact() {
       <div className="pc-section-meta pc-reveal"><span>05 / PEOPLE & PERSPECTIVE</span><span>CREATIVE INSTINCT. BUILDER ENERGY.</span></div>
       <div className="pc-people-intro pc-reveal">
         <h2 id="pc-people-title">Story instinct.<br /><em>Builder mindset.</em></h2>
-        <p>Indian cinema. Creative entrepreneurship. A shared belief that our stories can open up extraordinary new worlds.</p>
+        <p>Indian content. Creative entrepreneurship. A shared belief that our stories can open up extraordinary new worlds.</p>
+      </div>
+      <div className="pc-character-controls pc-reveal">
+        <button className="pc-character-pause" type="button" aria-label={charactersPaused ? 'Resume character idle animations' : 'Pause character idle animations'} aria-pressed={charactersPaused} onClick={() => setCharactersPaused(value => !value)}>{charactersPaused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}<span>{charactersPaused ? 'Resume idle' : 'Pause idle'}</span></button>
       </div>
       <div className="pc-people-grid">
         <div className="pc-connection" aria-hidden="true"><span className="pc-connection-track" /><span>STORY INSTINCT</span><Plus size={18} /><span>BUILDER MINDSET</span></div>
         {people.map((person, index) => <article key={person.name} className={`pc-person pc-person-${index + 1}`}>
           <div className="pc-portrait pc-reveal">
-            <img src={person.image} alt={person.name} loading="lazy" width="1100" height="1375" />
-            <div className="pc-portrait-shade" aria-hidden="true" />
-            <span className="pc-portrait-index" aria-hidden="true">0{index + 1} <span>/ THE HUMAN ELEMENT</span></span>
-            <span className="pc-photo-corner" aria-hidden="true" />
-            <span className="pc-portrait-coordinate" aria-hidden="true">ANTHILL / PEOPLE</span>
+            <InteractiveCharacter character={person.character} name={person.name} fallbackImage={person.image} paused={charactersPaused} />
           </div>
           <div className="pc-person-copy pc-reveal">
             <p className="pc-person-discipline">{person.discipline}</p>
             <h3>{person.firstName}<br />{person.lastName}<span>.</span></h3>
             <p className="pc-person-role">{person.role}</p>
-            <p className="pc-person-description">{person.description}</p>
-            <a className="pc-person-contact" href={person.source} target="_blank" rel="noopener noreferrer" aria-label={`Read more about ${person.name} on Anthill Ventures (opens in a new tab)`}>More about {person.firstName}<ArrowUpRight size={18} aria-hidden="true" /></a>
+            {person.description && <p className="pc-person-description">{person.description}</p>}
+            {person.source && <a className="pc-person-contact" href={person.source} target="_blank" rel="noopener noreferrer" aria-label={`Read more about ${person.name} on Anthill Ventures (opens in a new tab)`}>More about {person.firstName}<ArrowUpRight size={18} aria-hidden="true" /></a>}
           </div>
         </article>)}
       </div>

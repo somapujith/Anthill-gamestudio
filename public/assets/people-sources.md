@@ -1,6 +1,6 @@
-# People photography and profile sources
+# People artwork, photography and profile sources
 
-Retrieved 21 October 2026 from Anthill Ventures' official website. Actual portraits downloaded and optimized locally as WebP, with no AI alterations to the individuals.
+Rana and Prasad's photography below was retrieved 21 October 2026 from Anthill Ventures' official website. Those portraits were downloaded and optimized locally as WebP, with no AI alterations to the individuals. The V2 character artwork and additional portrait provenance are documented separately below.
 
 ## Rana Daggubati
 
@@ -21,3 +21,18 @@ Retrieved 21 October 2026 from Anthill Ventures' official website. Actual portra
 
 - Official Anthill Ventures contact email (profile and team page footer): Info@anthillventures.com
 - No personal email addresses or invented studio-specific contact details are used.
+
+## Juha Huhtakallio and Jani Joenniemi
+
+- Names and role labels come from this project's `V2` branch, commit `5af276f`, `index.html`.
+- Juha's supplied label is `GAMES & PUBLISHING`; Jani's is `PRODUCTION & FINANCING`. The current cards use those areas of work without adding employment titles or career claims.
+- V2 supplies no biographies or external profile URLs for these two people. Their cards omit those optional fields.
+- Their unchanged V2 fallback portraits are `public/assets/juha-portrait-v5.webp` and `public/assets/jani-portrait-v5.webp` from the same commit.
+
+## Interactive character artwork
+
+- All four character atlases are reused unchanged from this project's `V2` branch, commit `5af276f`, under `public/assets/`: `rana-atlas-v6.webp`, `prasad-atlas-v6.webp`, `juha-atlas-v6.webp` and `jani-atlas-v6.webp`.
+- Each atlas contains eight pixel character poses in a four-column, two-row grid. The current four-person section uses these illustrations in place of the photography; portraits appear only if the corresponding atlas fails to load.
+- Rana's original poses feature a gada strike; Prasad's feature phone gestures; Juha's feature a wave; Jani's feature a glasses adjustment. Thumbs-up feedback is a separate interface reaction bubble, rather than a new pose in the source artwork.
+- The four fallback portrait assets also exist in V2 commit `5af276f`: `rana-daggubati.webp`, `prasad-vanga.webp`, `juha-portrait-v5.webp` and `jani-portrait-v5.webp`. Rana and Prasad retain the photography and official profile sourcing documented above; Juha and Jani reuse the supplied V2 portraits unchanged.
+- Rana and Prasad retain their existing sourced biographies and outbound profile links. Juha and Jani use only the supplied V2 names and role labels.
