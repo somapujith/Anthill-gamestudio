@@ -1,0 +1,72 @@
+.pixel-motifs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.motif-slot {
+  position: absolute;
+  display: block;
+  animation: motif-float 7s ease-in-out infinite;
+}
+
+.motif { display: block; width: 100%; height: auto; }
+
+.motif-slot-invader-a { left: 14%; top: 17%; width: clamp(34px, 4.6vw, 70px); color: #39ff8a; filter: drop-shadow(0 0 8px #39ff8a); }
+.motif-slot-invader-b { right: 12%; top: 58%; width: clamp(24px, 3.2vw, 48px); color: #ff2bd0; filter: drop-shadow(0 0 8px #ff2bd0); animation-duration: 9s; animation-delay: -3s; }
+.motif-slot-ghost { right: 17%; top: 20%; width: clamp(28px, 3.6vw, 54px); color: #b36bff; filter: drop-shadow(0 0 9px #8a2bff); animation-duration: 8s; animation-delay: -1.5s; }
+
+.motif-slot-chase {
+  left: 20%;
+  right: 20%;
+  bottom: 15.5%;
+  height: clamp(18px, 2.4vw, 34px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: none;
+}
+
+.motif-pac { flex: none; position: relative; height: 100%; aspect-ratio: 1; color: #ffe94d; filter: drop-shadow(0 0 8px #ff2bd0); }
+.motif-pac .motif { position: absolute; inset: 0; height: 100%; }
+.motif-pac-open { animation: motif-chomp-open .5s steps(1) infinite; }
+.motif-pac-closed { animation: motif-chomp-closed .5s steps(1) infinite; }
+
+.motif-pellets {
+  order: 2;
+  flex: 1;
+  height: 100%;
+  --pellet: clamp(4px, .5vw, 7px);
+  background: linear-gradient(90deg, #39ff8a var(--pellet), transparent 0) 0 50% / calc(var(--pellet) * 4) var(--pellet) repeat-x;
+  filter: drop-shadow(0 0 6px #39ff8a);
+  animation: motif-pellets .8s steps(4) infinite;
+}
+
+.motif-invader { color: inherit; fill: currentColor; }
+.motif-ghost, .motif-pac .motif { fill: currentColor; }
+.motif-invader-2 { display: none; }
+.motif-slot-invader-a .motif-invader-1 { animation: motif-frame-a 1.2s steps(1) infinite; }
+.motif-slot-invader-a .motif-invader-2 { display: block; position: absolute; inset: 0; animation: motif-frame-b 1.2s steps(1) infinite; }
+.motif-slot-invader-b .motif-invader-1 { animation: motif-frame-a 1.6s steps(1) infinite; }
+.motif-slot-invader-b .motif-invader-2 { display: block; position: absolute; inset: 0; animation: motif-frame-b 1.6s steps(1) infinite; }
+
+@keyframes motif-float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -10px); }
+}
+
+@keyframes motif-frame-a { 0% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes motif-frame-b { 0% { opacity: 0; } 50% { opacity: 1; } }
+@keyframes motif-chomp-open { 0% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes motif-chomp-closed { 0% { opacity: 0; } 50% { opacity: 1; } }
+@keyframes motif-pellets { to { background-position-x: calc(var(--pellet) * -4); } }
+
+@media (max-width: 600px) {
+  .motif-slot-chase { left: 12%; right: 12%; bottom: 18%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motif-slot, .motif, .motif-pellets { animation: none !important; }
+  .motif-pac-closed, .motif-invader-2 { opacity: 0 !important; }
+}
