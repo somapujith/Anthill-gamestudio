@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDown, ArrowUpRight, Pause, Play, Plus } from 'lucide-react';
 import './people-contact.css';
 import InteractiveCharacter from './InteractiveCharacter.jsx';
+import './people-polish.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,26 +64,28 @@ export default function PeopleContact() {
 
   return <div ref={root} className="pc-root">
     <section id="people" className="pc-people" aria-labelledby="pc-people-title">
-      <div className="pc-section-meta pc-reveal"><span>05 / PEOPLE & PERSPECTIVE</span><span>CREATIVE INSTINCT. BUILDER ENERGY.</span></div>
+      <div className="pc-section-meta pc-reveal"><span>05 / PEOPLE & PERSPECTIVE</span><div className="pc-section-tools"><span className="pc-section-note">CREATIVE INSTINCT. BUILDER ENERGY.</span><div className="pc-character-controls"><button className="pc-character-pause" type="button" aria-label={charactersPaused ? 'Resume character idle animations' : 'Pause character idle animations'} aria-pressed={charactersPaused} onClick={() => setCharactersPaused(value => !value)}>{charactersPaused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}<span>{charactersPaused ? 'Resume idle' : 'Pause idle'}</span></button></div></div></div>
       <div className="pc-people-intro pc-reveal">
         <h2 id="pc-people-title">Story instinct.<br /><em>Builder mindset.</em></h2>
         <p>Indian content. Creative entrepreneurship. A shared belief that our stories can open up extraordinary new worlds.</p>
       </div>
-      <div className="pc-character-controls pc-reveal">
-        <button className="pc-character-pause" type="button" aria-label={charactersPaused ? 'Resume character idle animations' : 'Pause character idle animations'} aria-pressed={charactersPaused} onClick={() => setCharactersPaused(value => !value)}>{charactersPaused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}<span>{charactersPaused ? 'Resume idle' : 'Pause idle'}</span></button>
-      </div>
       <div className="pc-people-grid">
         <div className="pc-connection" aria-hidden="true"><span className="pc-connection-track" /><span>STORY INSTINCT</span><Plus size={18} /><span>BUILDER MINDSET</span></div>
-        {people.map((person, index) => <article key={person.name} className={`pc-person pc-person-${index + 1}`}>
+        {people.map((person, index) => <article key={person.name} className={`pc-person pc-person-${index + 1}`} aria-labelledby={`${uniqueId}-person-${person.character}`}>
           <div className="pc-portrait pc-reveal">
             <InteractiveCharacter character={person.character} name={person.name} fallbackImage={person.image} paused={charactersPaused} />
           </div>
           <div className="pc-person-copy pc-reveal">
             <p className="pc-person-discipline">{person.discipline}</p>
-            <h3>{person.firstName}<br />{person.lastName}<span>.</span></h3>
+            <h3 id={`${uniqueId}-person-${person.character}`}>{person.firstName}<br />{person.lastName}<span>.</span></h3>
             <p className="pc-person-role">{person.role}</p>
-            {person.description && <p className="pc-person-description">{person.description}</p>}
-            {person.source && <a className="pc-person-contact" href={person.source} target="_blank" rel="noopener noreferrer" aria-label={`Read more about ${person.name} on Anthill Ventures (opens in a new tab)`}>More about {person.firstName}<ArrowUpRight size={18} aria-hidden="true" /></a>}
+            {person.description && <details className="pc-person-details" onToggle={() => ScrollTrigger.refresh()}>
+              <summary>About {person.firstName}<Plus size={15} aria-hidden="true" /></summary>
+              <div className="pc-person-detail-content">
+                <p className="pc-person-description">{person.description}</p>
+                {person.source && <a className="pc-person-contact" href={person.source} target="_blank" rel="noopener noreferrer" aria-label={`Read more about ${person.name} on Anthill Ventures (opens in a new tab)`}>More about {person.firstName}<ArrowUpRight size={18} aria-hidden="true" /></a>}
+              </div>
+            </details>}
           </div>
         </article>)}
       </div>

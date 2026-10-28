@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import App from './App.jsx';
 import './studio-intro.css';
@@ -25,12 +25,26 @@ function StudioIntro({ onComplete }) {
       onComplete();
     };
     const centerOffset = () => (companion.offsetWidth + parseFloat(getComputedStyle(lockup).columnGap)) / 2;
-    const context = gsap.context(() => {
-      gsap.set(anthill, { x: centerOffset() });
+    let context;
+    const handoff = () => {
+      const anchor = document.querySelector('.pixel-logo-anchor');
+      if (!anchor || !alive) return;
+      const target = anchor.getBoundingClientRect();
+      const source = anthill.getBoundingClientRect();
+      if (!target.width || !target.height || !source.width || !source.height) return;
+      const x = Number(gsap.getProperty(anthill, 'x')) + target.left + target.width / 2 - source.left - source.width / 2;
+      const y = Number(gsap.getProperty(anthill, 'y')) + target.top + target.height / 2 - source.top - source.height / 2;
+      context.add(() => gsap.to(anthill, { x, y, scale: Math.min(target.width / source.width, target.height / source.height), duration: .75, ease: 'power3.inOut' }));
+    };
+    context = gsap.context(() => {
+      gsap.set(anthill, { x: centerOffset(), transformOrigin: 'center center' });
       gsap.timeline({ onComplete: finish })
         .from(anthill, { opacity: 0, y: 12, duration: .5, ease: 'power2.out' }, 0)
         .to(anthill, { x: 0, duration: .7, ease: 'power3.inOut' }, 1)
         .fromTo(companion, { autoAlpha: 0, x: 22, clipPath: 'inset(0 100% 0 0)' }, { autoAlpha: 1, x: 0, clipPath: 'inset(0 0% 0 0)', duration: .8, ease: 'power3.out' }, 1.2)
+        .to(companion, { autoAlpha: 0, duration: .3, ease: 'power2.in' }, 4.05)
+        .to('.intro-tagline', { opacity: 0, duration: .3 }, 4.05)
+        .call(handoff, [], 4.1)
         .to(element, { opacity: 0, duration: .5, ease: 'power2.inOut' }, 4.5);
     }, root);
 
@@ -71,5 +85,6 @@ function StudioIntro({ onComplete }) {
 
 export default function StudioEntry() {
   const [ready, setReady] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
-  return ready ? <App /> : <StudioIntro onComplete={() => setReady(true)} />;
+  const finish = useCallback(() => setReady(true), []);
+  return <><App introActive={!ready} />{!ready && <StudioIntro onComplete={finish} />}</>;
 }

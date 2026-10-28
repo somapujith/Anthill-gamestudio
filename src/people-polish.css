@@ -1,0 +1,165 @@
+.pc-root .pc-people,
+.pc-root .pc-contact {
+  padding-inline: clamp(22px, 5.2vw, 96px);
+}
+
+.pc-root .pc-people { padding-block: 64px 48px; }
+.pc-root .pc-section-meta { font-size: var(--font-label, 12px); color: #c3c8b8; }
+.pc-section-tools { display: flex; align-items: center; justify-content: flex-end; gap: 24px; }
+.pc-section-note { font: 12px/1.6 var(--font-mono); color: #b6bca9; text-align: right; }
+.pc-root .pc-character-controls { margin: 0; gap: 0; }
+.pc-root .pc-character-pause { min-height: 40px; padding: 8px 12px; font-size: 12px; border-color: #f0eee642; }
+
+.pc-root .pc-people-intro {
+  grid-template-columns: 1.2fr 1fr;
+  gap: 10%;
+  align-items: center;
+  margin: 42px 0 32px;
+}
+
+.pc-root .pc-people-intro h2 {
+  font: 400 clamp(36px, 4.3vw, 64px)/1.12 var(--font-display);
+  letter-spacing: -.015em;
+}
+
+.pc-root .pc-people-intro > p { max-width: 430px; font-size: 16px; line-height: 1.7; padding: 0; }
+.pc-root .pc-people-grid { column-gap: 32px; row-gap: 32px; padding-top: 44px; align-items: start; }
+.pc-root .pc-connection { font-size: 12px; color: #b6bca9; }
+.pc-root .pc-person {
+  display: grid;
+  grid-template-columns: minmax(220px, .95fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  padding: 0;
+}
+
+.pc-root .pc-portrait {
+  --ic-stage-size: clamp(280px, 21vw, 320px);
+  height: var(--ic-stage-size);
+  aspect-ratio: auto;
+  max-height: none;
+  clip-path: none;
+  border-color: #f0eee62b;
+  transition: border-color var(--duration-ui, 180ms) var(--ease-ui, ease);
+}
+
+.pc-root .ic-sprite { width: min(100%, var(--ic-stage-size)); height: auto; }
+
+.pc-root .pc-portrait:focus-within { border-color: var(--pc-lime); }
+.pc-root .pc-person-copy { padding-top: 18px; min-width: 0; }
+.pc-root .pc-person-discipline { font: 12px/1.65 var(--font-mono); color: #c3c8b8; letter-spacing: 0; min-height: 0; }
+.pc-root .pc-person-copy h3 {
+  font: 400 clamp(30px, 2.65vw, 44px)/1.08 var(--font-display);
+  letter-spacing: -.01em;
+  margin: 14px 0 14px;
+  overflow-wrap: normal;
+}
+
+.pc-root .pc-person-role { font: 500 14px/1.6 var(--font-body); color: var(--pc-cream); margin-bottom: 0 !important; }
+.pc-person-details { margin-top: 18px; border-top: 1px solid #f0eee630; }
+.pc-person-details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding-block: 10px;
+  color: var(--pc-lime);
+  font: 500 13px/1.5 var(--font-body);
+  cursor: pointer;
+  list-style: none;
+}
+
+.pc-person-details > summary::-webkit-details-marker { display: none; }
+.pc-person-details > summary:focus-visible { outline: 2px solid var(--pc-lime); outline-offset: 4px; }
+.pc-person-details > summary > svg { transition: transform var(--duration-ui, 180ms) var(--ease-ui, ease); flex: none; }
+.pc-person-details[open] > summary > svg { transform: rotate(45deg); }
+.pc-person-detail-content { padding-block: 4px 10px; }
+.pc-root .pc-person-description { font-size: 14px; line-height: 1.7; color: #c3c8b8; }
+.pc-root .pc-person-contact { min-height: 44px; margin-top: 12px; font-size: 13px; gap: 10px; }
+.pc-root .pc-people-note { margin-top: 32px !important; padding-top: 20px; font-size: 12px; color: #b6bca9; }
+
+.pc-root .pc-contact { padding-block: 56px 28px; background: #1b1e17; }
+.pc-root .pc-contact-mark { top: 32px; right: -32px; width: 350px; opacity: .04; }
+.pc-root .pc-invitation-intro { margin: 32px 0; gap: 32px; align-items: end; }
+.pc-root .pc-invitation-intro h2 { font: 400 clamp(48px, 5.3vw, 76px)/1.08 var(--font-display); letter-spacing: -.02em; }
+.pc-root .pc-invitation-intro > p { font-size: 16px; line-height: 1.7; max-width: 300px; color: #c3c8b8; padding: 0; }
+.pc-root .pc-invitation-layout { grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
+.pc-root .pc-invitation-tabs { border-bottom: 0; display: grid; align-content: start; gap: 8px; }
+.pc-root .pc-invitation-tab {
+  min-height: 76px;
+  padding: 18px;
+  border: 1px solid #f0eee62e;
+  background: #10110f40;
+  font: 400 clamp(22px, 2.1vw, 30px)/1.25 var(--font-display);
+  letter-spacing: 0;
+  transition: background var(--duration-ui, 180ms) var(--ease-ui, ease), border-color var(--duration-ui, 180ms) var(--ease-ui, ease), color var(--duration-ui, 180ms) var(--ease-ui, ease);
+}
+
+.pc-root .pc-invitation-tab > .pc-choice-number { font-size: 12px; color: #bec5b1; }
+.pc-root .pc-invitation-tab:hover { padding-left: 18px; border-color: #d6ed7966; color: var(--pc-cream); }
+.pc-root .pc-invitation-tab.pc-active { padding-left: 18px; background: #d6ed791c; border-color: #d6ed7990; box-shadow: inset 3px 0 var(--pc-lime); color: var(--pc-lime); }
+.pc-root .pc-invitation-panels { padding: 0; min-width: 0; }
+.pc-root .pc-invitation-panel { min-height: 100%; padding: 26px 28px; background: #10110f70; border: 1px solid #f0eee62b; border-top: 2px solid var(--pc-lime); }
+.pc-root .pc-invitation-note { font-size: 12px; line-height: 1.7; margin-bottom: 16px !important; }
+.pc-root .pc-invitation-panel h3 { font: 500 clamp(24px, 2.15vw, 32px)/1.2 var(--font-body); letter-spacing: -.03em; margin-bottom: 16px; }
+.pc-root .pc-invitation-description { font-size: 15px; line-height: 1.7; color: #c3c8b8; }
+.pc-root .pc-contact-link { min-height: 48px; padding: 12px 18px; margin-top: 22px; clip-path: none; gap: 28px; font-size: 13px; }
+.pc-root .pc-contact-link > svg { width: 18px; height: 18px; flex: none; }
+.pc-root .pc-contact-link:hover { transform: none; }
+.pc-root .pc-email-note { font-size: 13px; color: #bec5b1; margin-top: 14px; }
+.pc-root .pc-contact-bottom { margin-top: 32px; padding-top: 20px; font-size: 12px; color: #b6bca9; }
+
+@media (min-width: 1800px) {
+  .pc-root .pc-people, .pc-root .pc-contact { padding-inline: max(5.2vw, calc((100vw - 1620px) / 2)); }
+}
+
+@media (max-width: 1100px) {
+  .pc-root .pc-person { display: block; }
+  .pc-root .pc-portrait { --ic-stage-size: 280px; }
+  .pc-root .pc-person-copy { padding-top: 18px; }
+  .pc-root .pc-person-copy h3 { font-size: clamp(30px, 4vw, 42px); }
+  .pc-root .pc-people-intro { gap: 6%; }
+  .pc-root .pc-invitation-layout { gap: 24px; }
+  .pc-section-note { display: none; }
+}
+
+@media (max-width: 760px) {
+  .pc-root .pc-people { padding-block: 48px 40px; }
+  .pc-root .pc-people-intro { grid-template-columns: 1fr; margin: 30px 0 26px; gap: 20px; }
+  .pc-root .pc-people-intro h2 { font-size: clamp(36px, 7.5vw, 52px); }
+  .pc-root .pc-people-intro > p { max-width: 520px; }
+  .pc-root .pc-people-grid { column-gap: 24px; row-gap: 32px; }
+  .pc-root .pc-invitation-intro { display: block; margin-block: 28px; }
+  .pc-root .pc-invitation-intro > p { margin-top: 18px; max-width: 430px; }
+  .pc-root .pc-invitation-layout { grid-template-columns: 1fr; gap: 20px; }
+  .pc-root .pc-invitation-tabs { gap: 6px; }
+  .pc-root .pc-invitation-tab { min-height: 60px; font-size: 25px; padding: 14px 16px; }
+  .pc-root .pc-invitation-tab:hover, .pc-root .pc-invitation-tab.pc-active { padding-left: 16px; }
+  .pc-root .pc-invitation-panel { min-height: 0; padding: 24px; }
+}
+
+@media (max-width: 600px) {
+  .pc-root .pc-section-meta { align-items: center; gap: 12px; }
+  .pc-root .pc-section-meta > span:first-child { max-width: 180px; white-space: normal; }
+  .pc-root .pc-character-pause { min-height: 40px; padding: 8px 10px; gap: 7px; font-size: 12px; }
+  .pc-root .pc-people-grid { grid-template-columns: 1fr; row-gap: 28px; padding-top: 38px; }
+  .pc-root .pc-portrait { --ic-stage-size: clamp(230px, 64vw, 280px); }
+  .pc-root .pc-person-copy { padding-top: 16px; }
+  .pc-root .pc-person-copy h3 { font-size: 34px; margin-block: 10px; }
+  .pc-root .pc-person-discipline { font-size: 12px; }
+  .pc-root .pc-person-role { font-size: 14px; }
+  .pc-root .pc-person-details { margin-top: 12px; }
+  .pc-root .pc-people-note { display: block; line-height: 1.7; }
+  .pc-root .pc-people-note > span { margin-right: 8px; }
+  .pc-root .pc-contact { padding-top: 44px; }
+  .pc-root .pc-invitation-intro h2 { font-size: clamp(48px, 12vw, 60px); }
+  .pc-root .pc-invitation-tab { font-size: 24px; }
+  .pc-root .pc-invitation-panel { padding: 22px 20px; }
+  .pc-root .pc-contact-bottom { font-size: 12px; gap: 10px; }
+  .pc-root .pc-contact-bottom > span:last-child { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-root .pc-character-controls { display: none; }
+}

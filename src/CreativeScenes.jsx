@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDownRight } from 'lucide-react';
 import './creative-scenes.css';
+import './worlds-polish.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +17,8 @@ const directions = [
     image: 'mass-heroes.webp',
     alt: 'A larger-than-life Indian action hero in a red jacket and gold sunglasses, rendered in sculptural pixels.',
     className: 'cv-mass',
+    caption: 'Character study / Sculptural pixels',
+    width: 695,
   },
   {
     number: '02',
@@ -26,6 +29,8 @@ const directions = [
     image: 'mumbai.webp',
     alt: 'A vibrant comic-book vision of Mumbai, with a motorcycle rider against a dense, colourful city.',
     className: 'cv-mumbai',
+    caption: 'City study / Mumbai in motion',
+    width: 755,
   },
   {
     number: '03',
@@ -36,6 +41,8 @@ const directions = [
     image: 'myth.webp',
     alt: 'A cinematic, post-collapse landscape drawing on Hindu mythology, with monumental architecture and atmospheric light.',
     className: 'cv-myth',
+    caption: 'Environment study / Mythic futures',
+    width: 809,
   },
 ];
 
@@ -50,9 +57,9 @@ export default function CreativeScenes() {
         frames.forEach((frame) => {
           const picture = frame.querySelector('.cv-picture img');
           const line = frame.querySelector('.cv-progress-fill');
-          gsap.fromTo(picture, { yPercent: -5, scale: 1.05 }, {
-            yPercent: 5,
-            scale: 1.01,
+          gsap.fromTo(picture, { yPercent: -3, scale: 1.05 }, {
+            yPercent: 3,
+            scale: 1.05,
             ease: 'none',
             scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: 1.2 },
           });
@@ -109,8 +116,8 @@ export default function CreativeScenes() {
               </div>
             </div>
             <figure className="cv-picture">
-              <img src={`/assets/${direction.image}`} alt={direction.alt} loading="lazy" width="695" height="860" />
-              <figcaption><span>World exploration / Concept art</span><span>{direction.number} / 03</span></figcaption>
+              <img src={`/assets/${direction.image}`} alt={direction.alt} loading="lazy" width={direction.width} height="860" />
+              <figcaption><span>{direction.caption}</span><span>CONCEPT / {direction.number}</span></figcaption>
             </figure>
             <div className="cv-progress" aria-hidden="true"><span className="cv-progress-fill" /></div>
           </article>

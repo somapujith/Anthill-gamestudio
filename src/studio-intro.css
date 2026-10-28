@@ -8,4 +8,8 @@
 .intro-tagline{position:absolute;bottom:16vh;left:22px;right:22px;text-align:center;color:#979d8b;font:11px/1.7 var(--font-mono);letter-spacing:.1em}
 .intro-skip{position:absolute;bottom:30px;right:5vw;min-height:44px;display:flex;align-items:center;gap:18px;padding:10px 0;background:transparent;color:#adb3a1;font:12px/1.5 var(--font-body)}
 .intro-skip:hover{color:var(--cream)}.intro-skip>span{color:var(--red)}
+.studio-intro .intro-anthill{transform-origin:center center}
+.studio-intro .intro-anthill img{width:clamp(68px,12vw,156px);height:auto;object-fit:contain}
+.studio-intro .intro-game-studios{padding:0;line-height:0}
+.studio-intro .intro-game-studios img{width:clamp(180px,32vw,428px);height:auto}
 @media(max-width:600px){.intro-tagline{bottom:20vh;font-size:10px}.intro-skip{right:22px;bottom:20px}.intro-lockup{gap:14px}.intro-anthill{gap:10px}.intro-game-studios{padding-right:0}}

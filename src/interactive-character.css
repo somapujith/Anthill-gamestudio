@@ -14,6 +14,24 @@
   border-top: 1px solid #f0eee61c;
   border-bottom: 1px solid #f0eee614;
   pointer-events: none;
+  transition: border-color var(--duration-ui, 180ms) var(--ease-ui, ease);
+}
+
+.ic-stage::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  bottom: 13%;
+  left: 29%;
+  right: 29%;
+  height: 6%;
+  border: 1px solid #d6ed7955;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #d6ed792b, transparent 70%);
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity var(--duration-ui, 180ms) var(--ease-ui, ease), transform var(--duration-panel, 360ms) var(--ease-ui, ease);
+  pointer-events: none;
 }
 
 .ic-aura {
@@ -37,6 +55,8 @@
   mask-image: radial-gradient(ellipse, #000 12%, transparent 70%);
   transform: perspective(260px) rotateX(58deg);
   pointer-events: none;
+  opacity: .55;
+  transition: opacity var(--duration-panel, 360ms) var(--ease-ui, ease), transform var(--duration-panel, 360ms) var(--ease-ui, ease);
 }
 
 .ic-button {
@@ -157,6 +177,10 @@
 
 .ic-stage:focus-within .ic-hint { border-color: var(--pc-lime, #d6ed79); color: var(--pc-cream, #f0eee6); }
 .ic-stage:not([data-action='idle']) .ic-aura { opacity: 1; }
+.ic-stage:focus-within::before { border-color: #d6ed7955; }
+.ic-stage:focus-within::after { opacity: .8; transform: scale(1); }
+.ic-stage:focus-within .ic-floor { opacity: .9; transform: perspective(260px) rotateX(58deg) scale(1.04); }
+.ic-stage:focus-within .ic-aura { opacity: 1; }
 
 .ic-impact {
   position: absolute;
@@ -215,6 +239,9 @@
 
 @media (hover: hover) and (pointer: fine) {
   .ic-stage:hover .ic-aura { opacity: 1; }
+  .ic-stage:hover::before { border-color: #d6ed7955; }
+  .ic-stage:hover::after { opacity: .8; transform: scale(1); }
+  .ic-stage:hover .ic-floor { opacity: .9; transform: perspective(260px) rotateX(58deg) scale(1.04); }
   .ic-button:hover .ic-hint { border-color: #d6ed7980; color: var(--pc-cream, #f0eee6); }
 }
 
