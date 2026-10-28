@@ -84,7 +84,12 @@ function StudioIntro({ onComplete }) {
 }
 
 export default function StudioEntry() {
-  const [ready, setReady] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
+  // The server and the first hydration render expose the same usable page.
+  // Start the optional intro only after the browser can read motion preferences.
+  const [ready, setReady] = useState(null);
   const finish = useCallback(() => setReady(true), []);
-  return <><App introActive={!ready} />{!ready && <StudioIntro onComplete={finish} />}</>;
+  useLayoutEffect(() => {
+    setReady(matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
+  return <><App introActive={ready === false} />{ready === false && <StudioIntro onComplete={finish} />}</>;
 }

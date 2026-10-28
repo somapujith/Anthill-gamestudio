@@ -1,21 +1,17 @@
 import { useState } from 'react';
 import { Pause, Play } from 'lucide-react';
-import GradientASCII from './GradientASCII.jsx';
+import Aurora from './Aurora.jsx';
 import PixelLogo from './PixelLogo.jsx';
-import PixelMotifs from './PixelMotifs.jsx';
 import './hero-scene.css';
-
-const auroraColors = ['#8a2bff', '#ff2bd0', '#39ff8a', '#c58bff'];
 
 export default function HeroScene({ introActive = false }) {
   const [paused, setPaused] = useState(false);
   const motionPaused = paused || introActive;
 
-  return <figure className={`hero-artwork hero-scene${paused ? ' is-paused' : ''}`} aria-label="The Anthill pixel symbol in three dimensions">
+  return <figure className={`hero-artwork hero-scene${motionPaused ? ' is-paused' : ''}`} aria-label="The Anthill pixel symbol in prismatic glass, floating in a violet aurora">
     <div className="hero-scene-atmosphere" aria-hidden="true">
-      <GradientASCII colors={auroraColors} shape="pinch" characters=" .:+xX#" cellSize={13} density={0.65} glyphOpacity={0.4} gradientOpacity={0.85} glow={0.3} softness={0.85} scale={1.1} flow={1.1} speed={0.4} grain={0.06} flicker={0.08} mouseInteraction={false} clickEffect="none" intro={false} dpr={1} paused={motionPaused} />
+      <Aurora speed={0.55} opacity={0.95} paused={motionPaused} />
     </div>
-    <PixelMotifs />
     <div className="hero-scene-sculpture" aria-hidden="true"><PixelLogo paused={motionPaused} /></div>
     <div className="hero-scene-ground" aria-hidden="true" />
     <figcaption className="hero-scene-caption"><span>AN ENTIRELY<br /><em>NEW DIMENSION.</em></span></figcaption>

@@ -18,6 +18,10 @@ npm run present
 
 Open http://localhost:4174/ and use normal browser zoom. All artwork and fonts are self-hosted, so the built website has no external asset or API dependency. Keep this terminal running during the presentation. Stop with Ctrl+C.
 
+The production build pre-renders the page into `dist/index.html`, then React hydrates that HTML. Headings, content and native anchor links are available with JavaScript disabled. Development uses the usual Vite client rendering and hot reload; use the production preview to check pre-rendering and hydration.
+
+The hero uses a reference-derived crystal render with responsive AVIF/WebP sources and a gentle CSS perspective turn. The aurora is a self-hosted 61 KB WebP with a CSS transform animation. There is no WebGL, Three.js, or per-frame JavaScript in either effect. Motion pauses through the hero control, reduced-motion preferences, offscreen visibility and background-tab visibility. Character atlases load as the people section approaches the viewport.
+
 ## The experience
 
 The opening uses the supplied Anthill Ventures logo, centered for one second before it moves aside to reveal “GAME STUDIOS” with the supplied React Bits ShinyText effect. GAME STUDIOS stays visible and shining for the remaining intro time. The intro fades between 4.5 and 5 seconds, with a five-second deadline, before the website animations begin. Skip intro and Escape dismiss it immediately; reduced motion bypasses it. The hero image preloads during the intro, waits for decoding, then opens with a continuous curtain wipe and a gentle camera settle.
@@ -52,6 +56,7 @@ npx @playwright/cli -s=anthill run-code --filename scripts/interaction-audit.cjs
 npx @playwright/cli -s=anthill run-code --filename scripts/entry-check.cjs
 npx @playwright/cli -s=anthill run-code --filename scripts/hero-reveal-check.cjs
 npx @playwright/cli -s=anthill run-code --filename scripts/hero-text-check.cjs
+npx @playwright/cli -s=anthill run-code --filename scripts/hero-rendering-check.cjs
 ```
 
 The check asserts responsive text and overflow at eleven widths from 320px to 1920px, image and anchor integrity, loaded fonts, reduced motion, mobile content order, keyboard navigation, creative process states and contact choices. It also exercises the normal-motion desktop cinematic sequence at three scroll positions and verifies its text transition and sticky positioning. Screenshots are written under output/playwright/.
@@ -59,3 +64,5 @@ The check asserts responsive text and overflow at eleven widths from 320px to 19
 The viewport audit checks 49 sizes from 320px to 2560px, including both sides of every layout breakpoint and short landscape screens. The motion audit checks every section entrance completes in six portrait, landscape, tablet and desktop configurations, alongside background scroll locking, keyboard focus trapping, reading progress and the correct cinematic layout. The interaction audit checks all craft and contact states with motion enabled at 320px, 768px and 1440px, plus menu anchor navigation and resize cleanup. These checks exercise Chromium's emulated viewports; they do not establish physical-device or cross-browser coverage.
 
 The entry check verifies logo centering, the one-second hold, animated ShinyText, the five-second handoff and sustained GAME STUDIOS display, scrolling restoration, skip controls and reduced motion at four widths. The hero reveal check samples individual animation frames at three widths, including a delayed image response, to catch snapping, opacity flashes and premature reveals. The hero text check samples the intro-to-website handoff to verify the three headline lines reveal without rotation, opacity resets or leftover transforms.
+
+The hero rendering check verifies production HTML, JavaScript-disabled navigation, hydration, responsive artwork, absence of drawing contexts, and absence of Three.js and offscreen character-atlas requests during the hero.

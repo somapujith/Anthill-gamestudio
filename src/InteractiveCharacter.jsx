@@ -75,12 +75,12 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
   const config = CHARACTERS[character] || CHARACTERS.rana;
   const [frame, setFrame] = useState(0);
   const [action, setAction] = useState('idle');
-  const [ready, setReady] = useState('loading');
-  const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const [ready, setReady] = useState('waiting');
+  const [reduced, setReduced] = useState(false);
   const [status, setStatus] = useState('');
   const [activation, setActivation] = useState(0);
   const [inView, setInView] = useState(false);
-  const [pageVisible, setPageVisible] = useState(() => !document.hidden);
+  const [pageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
@@ -98,10 +98,12 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
     let activations = 0;
     let sequence = config.action;
     let imageSettled = false;
-    setReady('loading');
+    let imageRequested = false;
+    setReady('waiting');
     setAction('idle');
     setFrame(0);
     setReduced(reducedNow);
+    setPageVisible(!document.hidden);
 
     const showFrame = next => {
       if (currentFrame !== next) { currentFrame = next; setFrame(next); }
@@ -156,6 +158,7 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
     const wake = () => { stop(); tick(); };
     const activate = () => {
       if (disposed || document.hidden || (character === 'rana' && phase !== 'idle')) return;
+      loadAtlas();
       suspend();
       activations++;
       const approve = character !== 'rana' && character !== 'shobu' && activations % 2 === 0;
@@ -206,6 +209,7 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
     document.addEventListener('visibilitychange', onVisibility);
 
     const image = new Image();
+    image.decoding = 'async';
     const loaded = () => {
       if (disposed || imageSettled) return;
       imageSettled = true;
@@ -222,13 +226,25 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
     };
     image.onload = () => image.decode().then(loaded, failed);
     image.onerror = failed;
-    image.src = config.atlas;
+    const loadAtlas = () => {
+      if (disposed || imageRequested) return;
+      imageRequested = true;
+      setReady('loading');
+      image.src = config.atlas;
+    };
+    const preload = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      loadAtlas();
+      preload.disconnect();
+    }, { rootMargin: '300px 0px' });
+    preload.observe(root.current);
 
     return () => {
       disposed = true;
       stop();
       engine.current = null;
       observer.disconnect();
+      preload.disconnect();
       preference.removeEventListener('change', onPreference);
       document.removeEventListener('visibilitychange', onVisibility);
       image.onload = null;
@@ -247,8 +263,8 @@ export default function InteractiveCharacter({ character, name, fallbackImage, p
     <span className="ic-aura" aria-hidden="true" />
     <span className="ic-floor" aria-hidden="true" />
     <button className="ic-button" type="button" aria-label={`Interact with ${name}`} aria-busy={action !== 'idle'} onClick={() => engine.current?.activate()}>
-      <span className="ic-sprite" aria-hidden="true" data-frame={frame} style={{ backgroundImage: `url('${config.atlas}')`, backgroundPosition: `${(frame % 4) * 100 / 3}% ${frame < 4 ? 0 : 100}%` }} />
-      {ready === 'error' && fallbackImage && <img className="ic-fallback" src={fallbackImage} alt="" loading="lazy" width="1100" height="1375" />}
+      <span className="ic-sprite" aria-hidden="true" data-frame={frame} style={{ backgroundImage: ready === 'ready' ? `url('${config.atlas}')` : undefined, backgroundPosition: `${(frame % 4) * 100 / 3}% ${frame < 4 ? 0 : 100}%` }} />
+      {ready !== 'ready' && fallbackImage && <img className="ic-fallback" src={fallbackImage} alt="" loading="lazy" decoding="async" width="1100" height="1375" />}
       <span key={`impact-${activation}`} className="ic-impact" aria-hidden="true" />
       <span key={`particles-${activation}`} className="ic-particles" aria-hidden="true" />
       <span key={`reaction-${activation}`} className="ic-reaction" aria-hidden="true"><ReactionIcon size={20} strokeWidth={2} /><span>{message}</span></span>

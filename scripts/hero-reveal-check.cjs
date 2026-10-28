@@ -26,7 +26,7 @@ async (page) => {
     const skip = page.getByRole('button', { name: /Skip intro/ });
     if (await skip.isVisible()) await skip.click();
     await page.locator('.pixel-logo[data-ready="true"]').waitFor();
-    await page.locator('.gradient-ascii-container[data-ready="true"]').waitFor();
+    await page.locator('.aurora-container[data-ready="true"]').waitFor();
     await page.waitForTimeout(1700);
   };
   await page.emulateMedia({ reducedMotion: 'no-preference' });

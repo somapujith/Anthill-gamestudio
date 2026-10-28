@@ -1,5 +1,11 @@
 # Asset sources
 
+## Crystal hero artwork
+
+`hero-crystal-{480,960,1280}.{avif,webp}` is a transparent rendered interpretation of the user's supplied faceted crystal Anthill symbol reference, produced with image generation and exported at responsive sizes. The dark sapphire body, prismatic cyan/pink/peach edges and optical facets follow that reference. The source generated PNG remains outside the repository; these optimized assets are self-contained.
+
+`hero-nebula.webp` is an offline procedural violet/pink nebula texture with blue lower wisps. Both hero images animate only through CSS transforms; no image-generation service or procedural shader runs in the browser.
+
 ## Pixel studio logo
 
 `studio-logo.webp` is the Anthill Game Studios pixel lockup extracted from the top-left of page 1 of the supplied `Anthill-Game-Studios-Identity.pdf`. Its dark presentation backdrop is removed with a luminance alpha mask, retaining the original stepped symbol and lettering in cream. `studio-symbol.webp` and `studio-wordmark.webp` split that same lockup at its existing gap for the introductory reveal. All three use lossless WebP and are used for the studio branding.

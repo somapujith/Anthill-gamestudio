@@ -1,0 +1,33 @@
+﻿.aurora-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 94% 28%, #ff69bd18, transparent 35%),
+    radial-gradient(ellipse at 66% 43%, #8236e014, transparent 42%);
+}
+
+.aurora-texture {
+  position: absolute;
+  inset: -5%;
+  display: block;
+  width: 110%;
+  height: 110%;
+  object-fit: fill;
+  opacity: var(--aurora-opacity, .95);
+  animation: nebula-drift var(--aurora-duration, 50s) ease-in-out infinite alternate;
+}
+
+.aurora-container[data-motion='paused'] .aurora-texture { animation-play-state: paused; }
+
+@keyframes nebula-drift {
+  from { transform: translate3d(-1.5%, 1%, 0) scale(1); }
+  to { transform: translate3d(1.5%, -1%, 0) scale(1.035); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-texture { animation: none; }
+}
